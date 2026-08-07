@@ -1,0 +1,178 @@
+/* theme.css — the Fuji theme, an opt-in dark alternative to the paper default.
+ *
+ * Chosen from two references Farhad supplied on 2026-08-05. The one taken is the
+ * snow-capped Fuji on charcoal: a near-black ground, the mountain in a soft sky
+ * blue, snow in white, everything traced in dashed white, over a fine grain.
+ * The second reference — chocolate letterforms on a saturated sky-blue field,
+ * dashed in gold — contributed only its gold, which is this theme's warm accent.
+ *
+ * Why that one and not the blue-field reference: on this site blue and green are
+ * not decoration, they are meaning. `--jp-ink` marks Japanese and `--ar-ink`
+ * marks Arabic on every word card, chart cell and phrase. A saturated blue page
+ * would put blue text on a blue ground and dissolve half of that coding, and it
+ * would do so behind 31-row date tables and 53-card word grids. The charcoal
+ * reference gives the two inks more room than the paper default does, not less.
+ *
+ * ---- Three rules this file holds to ----
+ *
+ * 1. **`@media screen` wraps everything.** Print therefore always gets the paper
+ *    palette, whatever the reader has selected. The reference sheets exist to be
+ *    printed, and a charcoal page is both unreadable on paper and a waste of a
+ *    cartridge. style.css's own print block then applies untouched.
+ *
+ * 2. **Opt-in only — no `prefers-color-scheme`.** The `learn` skill makes the
+ *    course light-only precisely so a page cannot change under a reader who did
+ *    not ask. Keying on an explicit `data-theme` attribute keeps that promise:
+ *    with no stored choice every page renders exactly as it did before, on any
+ *    OS setting. This is a deliberate, narrow departure — see NOTES.md.
+ *
+ * 3. **Variables first, hardcoded colours second.** Most of the site already
+ *    draws from the custom properties, so re-pointing them does most of the
+ *    work. The block at the bottom fixes the eight places that hardcode a colour
+ *    and would otherwise render dark-on-dark. They are listed with the reason,
+ *    because the next hardcoded colour anyone adds will need the same treatment.
+ */
+
+@media screen {
+
+  :root[data-theme="fuji"] {
+    color-scheme: dark;
+
+    /* Ground and text. The ink is a warm off-white rather than #fff: pure white
+       on near-black glares, and Japanese glyphs are dense enough to shimmer. */
+    --bg: #24242a;
+    --ink: #e9e7e2;
+    --muted: #a6a6b0;
+    --faint: #7c7c88;
+
+    /* The mountain. This blue is the reference's, and it doubles as the link
+       colour and the Japanese ink — which is the same job it does on paper. */
+    --accent: #8ec5e0;
+    --accent-ink: #a9d5ea;
+    --green: #7fcfae;
+
+    /* Tinted panels. Each is its hue laid over the ground at low weight, so a
+       callout reads as a panel rather than as a second page. */
+    --amber-bg: #34291a;
+    --amber-edge: #6d5528;
+    --blue-bg: #1e2a34;
+    --blue-edge: #3c5c72;
+    --green-bg: #1c2a26;
+    --green-edge: #386350;
+
+    --card: #2c2c33;
+    --border: #3e3e48;
+    --code-bg: #2a2a31;
+    --output-bg: #26262c;
+
+    /* The shell blocks were already dark on paper; they need to separate from a
+       dark page rather than from a light one, so they go darker still. */
+    --shell-bg: #17171c;
+    --shell-ink: #e8e6df;
+
+    /* jp-ar.css owns these four in its own :root. `:root[data-theme]` outranks a
+       bare `:root`, so these win regardless of which file loads first. */
+    --jp-ink: #a9d5ea;
+    --ar-ink: #86d3ad;
+    --wrong-ink: #f09a90;
+    --wrong-bg: #382320;
+    --wrong-edge: #6d3f39;
+
+    --story-warm: #e8a06b;
+
+    /* The gold from the second reference. Used for the amber callout titles and
+       the voice warning, which are the only places the paper theme spends a
+       brown that dark mode cannot keep. */
+    --gold: #f0c94a;
+  }
+
+  /* The grain. Painted as a background layer on <body> rather than as an overlay
+     element, deliberately: an absolutely-positioned overlay over a scrolling page
+     is how you acquire a stray scrollbar or a click-blocking film, and this needs
+     to be neither. Behind the content, no z-index, no pointer target. */
+  :root[data-theme="fuji"] body {
+    background-color: var(--bg);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)' opacity='.22'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+
+  /* ---- the eight hardcoded colours, and why each has to move ---- */
+
+  /* A dark ochre chosen to sit on a pale amber panel. On a dark amber panel it
+     is nearly invisible, so it becomes the reference's gold.
+     (style.css `.callout.warn .title`, jp-ar.css `.voice-warning`) */
+  :root[data-theme="fuji"] .callout.warn .title,
+  :root[data-theme="fuji"] .voice-warning { color: var(--gold); }
+
+  /* The stroke charts are drawn on a white plate so black strokes read. Inverted,
+     the plate becomes the card and the strokes — already `var(--jp-ink)` — come
+     through as the reference's pale blue on charcoal. Leaving the plate white
+     would have been worse than a mismatch: --jp-ink is now light, so light-on-
+     white would have erased every stroke diagram on the site. */
+  :root[data-theme="fuji"] .kana-svg,
+  :root[data-theme="fuji"] .chart-svg { background: var(--card); }
+
+  /* The writing guides and the ghost letter beneath the strokes: both are pale
+     paper greys, both need to become faint marks on charcoal instead. */
+  :root[data-theme="fuji"] .kana-guide { stroke: #3f3f4a; }
+  :root[data-theme="fuji"] .kana-ghost path { stroke: #3a3a44; }
+
+  /* Stroke numbers sit in a filled `--accent` disc. On paper the accent is dark
+     blue and the numeral is white; here the accent is pale, so the numeral has
+     to become the ground to keep any contrast at all. */
+  :root[data-theme="fuji"] .kana-mark text { fill: #1c1c21; }
+
+  /* Two light-tinted hover states that would flash near-white on a dark page. */
+  :root[data-theme="fuji"] .od-toggle:hover { background: #26384a; }
+  :root[data-theme="fuji"] pre:not(.cmd) .copy-btn { background: #3a3a44; color: #d8d5cd; }
+  :root[data-theme="fuji"] pre:not(.cmd) .copy-btn:hover { background: #4a4a56; color: var(--ink); }
+
+  /* A keycap is a raised white chip on paper; on charcoal it is a recessed one. */
+  :root[data-theme="fuji"] kbd { background: #32323a; }
+
+  /* ---- the toggle itself ---- */
+
+  /* Matches nav.js's `.cnav-btn` exactly — same 42px disc, same border, same
+     shadow — and parks one gap to its left. They read as a pair because they
+     are the only two controls fixed to the page. */
+  .theme-btn {
+    position: fixed;
+    top: 14px;
+    right: 66px;
+    z-index: 60;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--border, #e5e0d2);
+    background: var(--card, #faf7ee);
+    color: var(--accent-ink, #0a4d92);
+    font-size: 17px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+    transition: border-color .12s ease, transform .08s ease;
+  }
+  .theme-btn:hover { border-color: var(--accent, #0f62b7); }
+  .theme-btn:active { transform: scale(.94); }
+
+  /* nav.js reserves the top-right corner and its drawer sits at z-index 62. The
+     toggle must not float over an open drawer, so it leaves when one opens. */
+  .cnav-open .theme-btn { opacity: 0; pointer-events: none; }
+
+  @media (max-width: 620px) {
+    /* jp-ar.css already reserves 34px on `.drill-head` for the hamburger alone.
+       Two discs need the width of both plus their gap, or the drill tally — the
+       only right-aligned line in the course — slides underneath them. */
+    .drill-head { padding-right: 86px; }
+  }
+}
+
+@media print {
+  /* Belt and braces: the palette block above is already screen-only, but the
+     button is a control and has no business on paper under any theme. */
+  .theme-btn { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-btn { transition: none; }
+}
