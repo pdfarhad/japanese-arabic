@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 10 · Seven Planets, Twelve Numbers</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/jp-ar.css">
+<link rel="stylesheet" href="../assets/theme.css">
+<script>try{var t=localStorage.getItem('jp-ar:theme');if(t==='fuji')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body data-lesson="0010-days-and-months">
+<main>
+
+<p class="kicker">Lesson 10 · <span class="jp">こよみ</span> — the calendar</p>
+<h1>Seven planets, twelve numbers</h1>
+<p class="lede">Japanese names its days after the planets and numbers its months.
+Arabic does the exact opposite — it numbers its days and borrows names for its
+months. Between them the two languages cover the whole calendar twice, and
+neither invented any of it.</p>
+<p class="meta">≈20 minutes · every reading checked against
+<a href="https://jisho.org/">Jisho.org</a> · the calendar history from
+<a href="https://eco.mtk.nao.ac.jp/koyomi/wiki/">National Astronomical
+Observatory of Japan</a> and the
+<a href="https://www.ndl.go.jp/koyomi/">National Diet Library</a></p>
+
+<div class="progress">
+  <span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span><span class="here"></span>
+  <em>Lesson 10 of the course</em>
+</div>
+
+<p class="voice-warning" data-voice-warning hidden></p>
+<div id="lang-switch"></div>
+
+<p>Nine lessons have been about characters. This one is the first about
+<em>words you will need on a Monday</em> — and it arrives with the first kanji in
+the course, because the days of the week cannot be written without them.</p>
+
+<div class="callout warn">
+  <p class="title">About the kanji on this page</p>
+  <p>Every weekday and every month here is shown in kanji as well as kana. They
+  are for <strong>recognition only</strong> — enough to read a timetable, a
+  ticket or a calendar. There is no stroke order, no writing practice and no
+  general kanji system in this lesson. The kana is still the form to learn.</p>
+  <p>You get twenty of them almost free, because you already know their sounds:
+  <span class="jp">日 月 火 水 木 金 土</span> and
+  <span class="jp">一 二 三 四 五 六 七 八 九 十</span>. Seven of those ten are
+  also the seven days.</p>
+</div>
+
+<h2 id="halves"><span class="no">1.</span>Each language numbers the half the other names</h2>
+
+<p>Before any vocabulary, the shape of the thing. There are two ways a language
+can label a repeating cycle: give each slot a name, or count. Japanese and
+Arabic each do one for days and the other for months — and they disagree about
+which is which.</p>
+
+<table>
+  <thead><tr><th></th><th>The seven days</th><th>The twelve months</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Japanese</strong></td>
+      <td><strong>Named</strong> — after the sun, the moon and five planets</td>
+      <td><strong>Numbered</strong> — month 1 to month 12, no names at all</td>
+    </tr>
+    <tr>
+      <td><strong>Arabic</strong></td>
+      <td><strong>Numbered</strong> — the first, the second … the fifth, then two named</td>
+      <td><strong>Named</strong> — borrowed, either from Latin or from Babylon</td>
+    </tr>
+    <tr>
+      <td><strong>English</strong></td>
+      <td>Named — Norse gods standing in for the same planets</td>
+      <td>Named — Roman</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>English numbers neither, which is why it is the hardest of the three to learn
+and why you had to memorise <em>thirty days hath September</em> as a child.
+Japanese months cost you nothing: if you can count to twelve, you know all of
+them by the end of section 4.</p>
+
+<h2 id="days"><span class="no">2.</span>The seven days are the seven planets</h2>
+
+<p>Every weekday is one character plus
+<span class="jp">曜日</span> <span class="romaji">yōbi</span>. Change the
+character, change the day — that is the whole system. The character names one of
+the seven bodies the ancient world could see moving against the stars.</p>
+
+<div class="callout win">
+  <p class="title">Trick 1 · Learn the planet and the day comes free</p>
+  <p>Five of the seven day names begin with <strong>exactly the same reading as
+  the planet</strong>. Not a similar one — the same one.</p>
+  <p><span class="jp">火星</span> <span class="romaji">kasei</span>, Mars →
+  <span class="jp">火曜日</span> <span class="romaji">kayōbi</span>.
+  <span class="jp">水星</span> <span class="romaji">suisei</span>, Mercury →
+  <span class="jp">水曜日</span> <span class="romaji">suiyōbi</span>. And the
+  same for <span class="jp">木</span>, <span class="jp">金</span> and
+  <span class="jp">土</span>.</p>
+  <p>The other two are the Sun and the Moon, which have no
+  <span class="jp">星</span> <span class="romaji">sei</span> because they are not
+  planets. That is not an exception to remember — it is astronomy.</p>
+</div>
+
+<p>Tap any word to hear it. The middle column is the sky; read straight down it
+and you have the classical planetary order, which is also the order of the
+Japanese week.</p>
+
+<div id="week-grid">
+  <p><em>This chart is rendered from <code>assets/week-data.js</code> and needs
+  JavaScript. The same seven days, laid out to print, are on the
+  <a href="../reference/calendar.html">calendar reference sheet</a>.</em></p>
+</div>
+
+<p>The Arabic column is the mirror. <span class="ar-i">الْأَحَد</span> is
+literally <em>the first</em>, <span class="ar-i">الْاِثْنَيْن</span> <em>the
+second</em>, and the count runs to <span class="ar-i">الْخَمِيس</span>, the
+fifth. Then it stops: <span class="ar-i">الْجُمُعَة</span> is the
+<em>gathering</em> and <span class="ar-i">السَّبْت</span> is the <em>rest</em>.
+Both languages break their own pattern at exactly the point where the week stops
+being arithmetic and starts being about what people do.</p>
+
+<div class="callout win">
+  <p class="title">Trick 2 · Neither language invented its week — so the two agree more than they look</p>
+  <p>The seven-day week is Babylonian. It reached Japan as astrology and reached
+  Arabic as a translation: Wiktionary records that the numbered Arabic day names
+  are a phono-semantic matching of Syriac
+  <span dir="ltr">ܐܪܒܥܐ ܒܫܒܐ</span>, “fourth of the week”, and that they
+  <em>replaced</em> older native Arabic names — <span class="ar-i">دُبَار</span>
+  for Wednesday, <span class="ar-i">جُبَار</span> for Tuesday.</p>
+  <p>So when Japanese <span class="jp">土曜日</span> (Saturn) lines up with
+  English <em>Saturday</em> (Saturn) and Arabic
+  <span class="ar-i">السَّبْت</span> (Sabbath) sits in the same slot, that is not
+  coincidence. It is one cycle, borrowed three times.</p>
+</div>
+
+<h2 id="history"><span class="no">3.</span>Japan had the names for a thousand years before it had the week</h2>
+
+<p>This is the part that makes the seven names stick, because it explains why
+they are astrological rather than practical.</p>
+
+<ul>
+  <li><strong>806.</strong> The monk <span class="jp">空海</span> Kūkai returns
+  from Tang China with over 460 volumes of esoteric Buddhist texts. Among them is
+  the <span class="jp">宿曜経</span> <em>Sukuyōkyō</em>, an Indian astrology
+  manual translated into Chinese by Amoghavajra around 759. It carries the seven
+  luminaries — and with them, the names of the seven days.</li>
+  <li><strong>Heian period.</strong> The court calendar,
+  <span class="jp">具注暦</span>, prints the day of the week beside each date —
+  not to organise the working week, but to tell you whether the day is lucky.
+  Fujiwara no Michinaga's diary <span class="jp">御堂関白記</span> records the
+  weekday every day. Sunday was sometimes written
+  <span class="jp">密</span> instead: a transcription of Sogdian <em>Myr</em>,
+  the god Mithra, picked up somewhere along the road from Babylon.</li>
+  <li><strong>Until 1876.</strong> Nobody rested on Sunday, because there was no
+  week to rest in. Government offices closed on days containing a 1 or a 6 — the
+  1st, 6th, 11th, 16th, 21st and 26th — a system called
+  <span class="jp">一六日</span> <em>ichirokubi</em>, fixed by decree in 1868.</li>
+  <li><strong>12 March 1876.</strong> Cabinet Order No. 27 makes Sunday a full
+  holiday and Saturday a half-day, effective that April. The names were a
+  thousand and seventy years old; the week itself was new.</li>
+</ul>
+
+<p class="meta">The 1876 date and the <span class="jp">一六日</span> system it
+replaced are taken from the National Astronomical Observatory of Japan's
+<a href="https://eco.mtk.nao.ac.jp/koyomi/wiki/">calendar wiki</a>, which cites
+the original decrees held by the National Diet Library. It is worth reading over
+the usual textbook line: the popular claim is simply “Japan adopted the week in
+1876”, and the interesting fact — that the <em>names</em> had been in continuous
+use since 806 — gets lost.</p>
+
+<h2 id="months"><span class="no">4.</span>Twelve months, twelve numbers</h2>
+
+<p>A month is the number plus <span class="jp">月</span>
+<span class="romaji">gatsu</span>. That is the entire rule, and it has three
+exceptions — all three because the month names entered Japanese from Chinese as
+one fixed block, long before <span class="jp">よん</span>,
+<span class="jp">なな</span> and <span class="jp">きゅう</span> became the normal
+way to count.</p>
+
+<table>
+  <thead><tr><th>#</th><th>Kanji</th><th>Kana</th><th>Romaji</th><th></th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td class="chart-jp">一月</td><td class="chart-jp">いちがつ</td><td><span class="romaji">ichigatsu</span></td><td></td></tr>
+    <tr><td>2</td><td class="chart-jp">二月</td><td class="chart-jp">にがつ</td><td><span class="romaji">nigatsu</span></td><td></td></tr>
+    <tr><td>3</td><td class="chart-jp">三月</td><td class="chart-jp">さんがつ</td><td><span class="romaji">sangatsu</span></td><td></td></tr>
+    <tr><td>4</td><td class="chart-jp">四月</td><td class="chart-jp"><strong>しがつ</strong></td><td><span class="romaji">shigatsu</span></td><td><strong>Not よんがつ.</strong></td></tr>
+    <tr><td>5</td><td class="chart-jp">五月</td><td class="chart-jp">ごがつ</td><td><span class="romaji">gogatsu</span></td><td></td></tr>
+    <tr><td>6</td><td class="chart-jp">六月</td><td class="chart-jp">ろくがつ</td><td><span class="romaji">rokugatsu</span></td><td></td></tr>
+    <tr><td>7</td><td class="chart-jp">七月</td><td class="chart-jp"><strong>しちがつ</strong></td><td><span class="romaji">shichigatsu</span></td><td><strong>Not なながつ</strong> — though some speakers say it, to keep July clear of January.</td></tr>
+    <tr><td>8</td><td class="chart-jp">八月</td><td class="chart-jp">はちがつ</td><td><span class="romaji">hachigatsu</span></td><td></td></tr>
+    <tr><td>9</td><td class="chart-jp">九月</td><td class="chart-jp"><strong>くがつ</strong></td><td><span class="romaji">kugatsu</span></td><td><strong>Not きゅうがつ</strong>, and this one has no accepted alternative.</td></tr>
+    <tr><td>10</td><td class="chart-jp">十月</td><td class="chart-jp">じゅうがつ</td><td><span class="romaji">jūgatsu</span></td><td></td></tr>
+    <tr><td>11</td><td class="chart-jp">十一月</td><td class="chart-jp">じゅういちがつ</td><td><span class="romaji">jūichigatsu</span></td><td></td></tr>
+    <tr><td>12</td><td class="chart-jp">十二月</td><td class="chart-jp">じゅうにがつ</td><td><span class="romaji">jūnigatsu</span></td><td></td></tr>
+  </tbody>
+</table>
+
+<div class="callout win">
+  <p class="title">Trick 3 · Four, seven and nine keep their old clothes</p>
+  <p><span class="jp">し</span>, <span class="jp">しち</span> and
+  <span class="jp">く</span> are the classical readings of 4, 7 and 9. They
+  survive in the calendar and almost nowhere else in everyday counting, so the
+  three odd months are not three separate facts — they are one fact about how
+  old this vocabulary is.</p>
+</div>
+
+<p>Arabic goes the other way and borrows names.
+<span class="ar-i">يَنايِر</span>, <span class="ar-i">فِبْرايِر</span>,
+<span class="ar-i">مارِس</span> are Latin months in Arabic clothing, used across
+Egypt, Sudan, Yemen and the Gulf. Iraq and the Levant keep an older set entirely
+— <span class="ar-i">كانُون الثانِي</span>,
+<span class="ar-i">شُباط</span>, <span class="ar-i">آذار</span> — inherited from
+the Babylonian calendar and cousin to the Hebrew month names. Both are Modern
+Standard Arabic; pan-Arab news often prints both, separated by a slash. All
+twelve of each are on the
+<a href="../reference/calendar.html">reference sheet</a>.</p>
+
+<p>And a third Arabic option is the Japanese one:
+<span class="ar-i">الشَّهْر السَّابِع</span>, “the seventh month”, is ordinary
+speech in the Gulf and Jordan.</p>
+
+<h2 id="point"><span class="no">5.</span>The same characters, two different words</h2>
+
+<p>Lesson 6's best trick was <span class="jp">かん</span> — the suffix that turns
+a point in time into a stretch of it, so <span class="jp">なんじ</span> asks
+<em>what o'clock</em> and <span class="jp">なんじかん</span> asks <em>how many
+hours</em>. The calendar is where that distinction gets sharp enough to bite,
+because here the two meanings share their spelling.</p>
+
+<table>
+  <thead><tr><th>Written</th><th>Read this way…</th><th>…or this way</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="chart-jp">一月</td>
+      <td class="chart-jp">いちがつ<br><span class="romaji">ichigatsu</span><span class="chart-en">January — a point</span></td>
+      <td class="chart-jp">ひとつき<br><span class="romaji">hitotsuki</span><span class="chart-en">one month — a span</span></td>
+    </tr>
+    <tr>
+      <td class="chart-jp">一日</td>
+      <td class="chart-jp">ついたち<br><span class="romaji">tsuitachi</span><span class="chart-en">the 1st — a point</span></td>
+      <td class="chart-jp">いちにち<br><span class="romaji">ichinichi</span><span class="chart-en">one day — a span</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Both readings of both words are everyday Japanese; the kanji genuinely does
+not choose between them, and context does. When Japanese wants to be
+unambiguous it reaches for a counter instead — and the counter flips the
+readings back to the modern ones:</p>
+
+<table>
+  <thead><tr><th>Point in time</th><th>Length of time</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="chart-jp">四月 · しがつ<br><span class="chart-en">April</span></td>
+      <td class="chart-jp">四か月 · よんかげつ<br><span class="chart-en">four months long</span></td>
+    </tr>
+    <tr>
+      <td class="chart-jp">一週 · いっしゅう<br><span class="chart-en">week one</span></td>
+      <td class="chart-jp">一週間 · いっしゅうかん<br><span class="chart-en">a week long</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout win">
+  <p class="title">Trick 4 · The old readings name, the new readings count</p>
+  <p><span class="jp">し しち く</span> label the months.
+  <span class="jp">よん なな きゅう</span> measure them. If you hear
+  <span class="jp">よん</span> anywhere near a month, you are being told a
+  duration, not a date — and the little <span class="jp">か</span> in
+  <span class="jp">よんかげつ</span> is the whole signal.</p>
+</div>
+
+<h2 id="dates"><span class="no">6.</span>Dates are where the native numbers survived</h2>
+
+<p>Japanese has two number systems: the Chinese one you have been using
+(<span class="jp">いち に さん</span>) and an older native one
+(<span class="jp">ひとつ ふたつ みっつ</span>). The native one has been retreating
+for centuries. The first ten days of the month are its last stronghold.</p>
+
+<table>
+  <thead><tr><th>Date</th><th>Kana</th><th>Romaji</th><th>Its native number</th></tr></thead>
+  <tbody>
+    <tr><td class="chart-jp">一日</td><td class="chart-jp">ついたち</td><td><span class="romaji">tsuitachi</span></td><td><strong>None</strong> — see below</td></tr>
+    <tr><td class="chart-jp">二日</td><td class="chart-jp">ふつか</td><td><span class="romaji">futsuka</span></td><td class="chart-jp">ふたつ</td></tr>
+    <tr><td class="chart-jp">三日</td><td class="chart-jp">みっか</td><td><span class="romaji">mikka</span></td><td class="chart-jp">みっつ</td></tr>
+    <tr><td class="chart-jp">四日</td><td class="chart-jp">よっか</td><td><span class="romaji">yokka</span></td><td class="chart-jp">よっつ</td></tr>
+    <tr><td class="chart-jp">五日</td><td class="chart-jp">いつか</td><td><span class="romaji">itsuka</span></td><td class="chart-jp">いつつ</td></tr>
+    <tr><td class="chart-jp">六日</td><td class="chart-jp">むいか</td><td><span class="romaji">muika</span></td><td class="chart-jp">むっつ</td></tr>
+    <tr><td class="chart-jp">七日</td><td class="chart-jp">なのか</td><td><span class="romaji">nanoka</span></td><td class="chart-jp">ななつ</td></tr>
+    <tr><td class="chart-jp">八日</td><td class="chart-jp">ようか</td><td><span class="romaji">yōka</span></td><td class="chart-jp">やっつ</td></tr>
+    <tr><td class="chart-jp">九日</td><td class="chart-jp">ここのか</td><td><span class="romaji">kokonoka</span></td><td class="chart-jp">ここのつ</td></tr>
+    <tr><td class="chart-jp">十日</td><td class="chart-jp">とおか</td><td><span class="romaji">tōka</span></td><td class="chart-jp">とお</td></tr>
+  </tbody>
+</table>
+
+<p>Read the last two columns together and the list stops being ten arbitrary
+words: <span class="jp">ふたつ</span> → <span class="jp">ふつか</span>,
+<span class="jp">みっつ</span> → <span class="jp">みっか</span>. The
+<span class="jp">か</span> on the end is an old word for <em>day</em> in its own
+right.</p>
+
+<div class="callout warn">
+  <p class="title">The three that are not in that pattern</p>
+  <ul>
+    <li><span class="jp">ついたち</span>, the 1st, is not
+    <span class="jp">ひとつ</span> anything. It is
+    <span class="jp">月立ち</span> <em>tsukitachi</em> — “the moon rising”, the
+    day the new moon began the month in the old lunar calendar. It has outlived
+    the calendar that made it.</li>
+    <li><span class="jp">はつか</span>, the 20th, is the last trace of
+    <span class="jp">はた</span>, an old word for twenty — the same one inside
+    <span class="jp">はたち</span>, “twenty years old”. Never
+    <span class="jp">にじゅうにち</span>.</li>
+    <li><span class="jp">よっか</span> keeps going up the calendar: the 14th is
+    <span class="jp">じゅうよっか</span> and the 24th is
+    <span class="jp">にじゅうよっか</span>.</li>
+  </ul>
+  <p>Everything else from the 11th on is simply the number plus
+  <span class="jp">にち</span>. The full 1-to-31 table is on the
+  <a href="../reference/calendar.html">reference sheet</a>.</p>
+</div>
+
+<p>Watch <span class="jp">よっか</span> against
+<span class="jp">ようか</span> — the 4th against the 8th. This is the pair
+learners actually confuse, and counting beats will not save you: both are
+<strong>three</strong>, <span class="jp">よ・っ・か</span> against
+<span class="jp">よ・う・か</span>. What differs is what the middle beat
+<em>is</em> — silence held in the throat for
+<span class="jp">よっか</span>, a held <em>o</em> for
+<span class="jp">ようか</span>. Both of those are lesson 9's small
+<span class="jp">ッ</span> and lesson 7's long vowel, met again where getting
+them wrong moves an appointment by four days. Say them back to back.</p>
+
+<h2 id="kon"><span class="no">7.</span>This one, last one, next one</h2>
+
+<p>Three prefixes cover a week, a month and a year at once —
+<span class="jp">こん</span> <em>this</em>,
+<span class="jp">せん</span> <em>previous</em>,
+<span class="jp">らい</span> <em>coming</em>. Nine words for the price of three,
+except that the year row refuses twice.</p>
+
+<table>
+  <thead><tr><th></th><th class="chart-jp">しゅう · week</th><th class="chart-jp">げつ · month</th><th class="chart-jp">ねん · year</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>this</strong></td>
+      <td class="chart-jp">こんしゅう</td>
+      <td class="chart-jp">こんげつ</td>
+      <td class="chart-jp"><strong>ことし</strong><br><span class="chart-en">not こんねん</span></td>
+    </tr>
+    <tr>
+      <td><strong>last</strong></td>
+      <td class="chart-jp">せんしゅう</td>
+      <td class="chart-jp">せんげつ</td>
+      <td class="chart-jp"><strong>きょねん</strong><br><span class="chart-en">not せんねん</span></td>
+    </tr>
+    <tr>
+      <td><strong>next</strong></td>
+      <td class="chart-jp">らいしゅう</td>
+      <td class="chart-jp">らいげつ</td>
+      <td class="chart-jp">らいねん</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Arabic runs the same three-way split with the same economy, and it is worth
+learning as a set for exactly the same reason —
+<span class="ar-i">هٰذَا</span> <em>this</em>,
+<span class="ar-i">الْمَاضِي</span> <em>the past one</em>,
+<span class="ar-i">الْقَادِم</span> <em>the coming one</em>, attached to
+<span class="ar-i">الْأُسْبُوع</span>,
+<span class="ar-i">الشَّهْر</span> and <span class="ar-i">السَّنَة</span>. Unlike
+Japanese, Arabic makes no exception for the year.</p>
+
+<h2 id="words"><span class="no">8.</span>Fifty-three words</h2>
+
+<p>The seven days, the twelve months, the dates, and the everyday words that go
+with them. This is the first chapter in the course whose word rule bars
+<em>nothing</em>: after lesson 9 both scripts are complete, so
+<span class="jp">あさって</span> and
+<span class="jp">いっしゅうかん</span> — which need the small
+<span class="jp">っ</span> — are finally writable.</p>
+
+<div id="vocab-list" class="vw-long" data-vocab="VOCAB10">
+  <p><em>The word cards need JavaScript. The same words, in the same groups, are
+  on the <a href="../reference/calendar.html">calendar reference sheet</a>.</em></p>
+</div>
+
+<h3>Drill them for meaning</h3>
+
+<p>Three directions, as in every vocabulary chapter. Wrong answers are drawn
+from inside the same group, so the hard calls are the ones that are genuinely
+hard: <span class="jp">よっか</span> against
+<span class="jp">ようか</span>, <span class="jp">しがつ</span> against
+<span class="jp">しちがつ</span>,
+<span class="jp">せんしゅう</span> against
+<span class="jp">せんげつ</span>.</p>
+
+<div id="vocab-drill" data-vocab="VOCAB10">
+  <p><em>The drill needs JavaScript. Every word it asks about is in the list
+  above.</em></p>
+</div>
+
+<h2 id="sentences"><span class="no">9.</span>Ask for a date</h2>
+
+<p>No new grammar — the same <span class="jp">〜は 〜ですか。</span> frame from
+lesson 6, and its answer with the <span class="jp">か</span> dropped. What is new
+is that lesson 6 taught you three questions you had no way to answer:
+<span class="jp">なんようび</span>, <span class="jp">なんがつ</span> and
+<span class="jp">なんにち</span>. They have answers now.</p>
+
+<p class="jp-frame">〜は 〜ですか。</p>
+
+<ol class="phrases">
+
+  <li class="phrase">
+    <p class="phrase-en"><span class="no">1.</span>What day of the week is it today?</p>
+    <div class="side side-jp">
+      <div class="side-head"><span class="side-tag">Japanese</span>
+        <button class="say" type="button" data-speak="きょうは なんようびですか。" data-lang="ja" aria-label="Play the Japanese">🔊</button></div>
+      <p class="side-text">きょうは なんようびですか。</p>
+      <p class="side-translit">kyō wa nan'yōbi desu ka</p>
+    </div>
+    <div class="side side-ar">
+      <div class="side-head"><span class="side-tag">Arabic</span>
+        <button class="say say-ar" type="button" data-speak="أَيُّ يَوْمٍ هُوَ الْيَوْمُ؟" data-lang="ar" aria-label="Play the Arabic">🔊</button></div>
+      <p class="side-text" lang="ar" dir="rtl"><span class="ar-i">أَيُّ يَوْمٍ هُوَ الْيَوْمُ؟</span></p>
+      <p class="side-translit">ayyu yawmin huwa al-yawm</p>
+    </div>
+  </li>
+
+  <li class="phrase">
+    <p class="phrase-en"><span class="no">2.</span>Today is Thursday.</p>
+    <div class="side side-jp">
+      <div class="side-head"><span class="side-tag">Japanese</span>
+        <button class="say" type="button" data-speak="きょうは もくようびです。" data-lang="ja" aria-label="Play the Japanese">🔊</button></div>
+      <p class="side-text">きょうは もくようびです。</p>
+      <p class="side-translit">kyō wa mokuyōbi desu</p>
+    </div>
+    <div class="side side-ar">
+      <div class="side-head"><span class="side-tag">Arabic</span>
+        <button class="say say-ar" type="button" data-speak="الْيَوْمُ هُوَ الْخَمِيسُ." data-lang="ar" aria-label="Play the Arabic">🔊</button></div>
+      <p class="side-text" lang="ar" dir="rtl"><span class="ar-i">الْيَوْمُ هُوَ الْخَمِيسُ.</span></p>
+      <p class="side-translit">al-yawmu huwa al-khamīs</p>
+    </div>
+  </li>
+
+  <li class="phrase">
+    <p class="phrase-en"><span class="no">3.</span>What month is your birthday?</p>
+    <div class="side side-jp">
+      <div class="side-head"><span class="side-tag">Japanese</span>
+        <button class="say" type="button" data-speak="たんじょうびは なんがつですか。" data-lang="ja" aria-label="Play the Japanese">🔊</button></div>
+      <p class="side-text">たんじょうびは なんがつですか。</p>
+      <p class="side-translit">tanjōbi wa nangatsu desu ka</p>
+    </div>
+    <div class="side side-ar">
+      <div class="side-head"><span class="side-tag">Arabic</span>
+        <button class="say say-ar" type="button" data-speak="فِي أَيِّ شَهْرٍ عِيدُ مِيلَادِكَ؟" data-lang="ar" aria-label="Play the Arabic">🔊</button></div>
+      <p class="side-text" lang="ar" dir="rtl"><span class="ar-i">فِي أَيِّ شَهْرٍ عِيدُ مِيلَادِكَ؟</span></p>
+      <p class="side-translit">fī ayyi shahrin ʿīdu mīlādika</p>
+    </div>
+  </li>
+
+  <li class="phrase">
+    <p class="phrase-en"><span class="no">4.</span>When is the holiday?</p>
+    <div class="side side-jp">
+      <div class="side-head"><span class="side-tag">Japanese</span>
+        <button class="say" type="button" data-speak="やすみは いつですか。" data-lang="ja" aria-label="Play the Japanese">🔊</button></div>
+      <p class="side-text">やすみは いつですか。</p>
+      <p class="side-translit">yasumi wa itsu desu ka</p>
+    </div>
+    <div class="side side-ar">
+      <div class="side-head"><span class="side-tag">Arabic</span>
+        <button class="say say-ar" type="button" data-speak="مَتَى الْعُطْلَةُ؟" data-lang="ar" aria-label="Play the Arabic">🔊</button></div>
+      <p class="side-text" lang="ar" dir="rtl"><span class="ar-i">مَتَى الْعُطْلَةُ؟</span></p>
+      <p class="side-translit">matā al-ʿuṭla</p>
+    </div>
+  </li>
+
+  <li class="phrase">
+    <p class="phrase-en"><span class="no">5.</span>It is next Friday.</p>
+    <div class="side side-jp">
+      <div class="side-head"><span class="side-tag">Japanese</span>
+        <button class="say" type="button" data-speak="らいしゅうの きんようびです。" data-lang="ja" aria-label="Play the Japanese">🔊</button></div>
+      <p class="side-text">らいしゅうの きんようびです。</p>
+      <p class="side-translit">raishū no kin'yōbi desu</p>
+    </div>
+    <div class="side side-ar">
+      <div class="side-head"><span class="side-tag">Arabic</span>
+        <button class="say say-ar" type="button" data-speak="يَوْمُ الْجُمُعَةِ الْقَادِمِ." data-lang="ar" aria-label="Play the Arabic">🔊</button></div>
+      <p class="side-text" lang="ar" dir="rtl"><span class="ar-i">يَوْمُ الْجُمُعَةِ الْقَادِمِ.</span></p>
+      <p class="side-translit">yawmu al-jumuʿati al-qādim</p>
+    </div>
+  </li>
+
+</ol>
+<p class="meta" data-public-only>Sentence 5 uses
+<span class="jp">の</span> to join one noun to another:
+<span class="jp">らいしゅうの きんようび</span> is “next week's Friday”, which is
+how Japanese says “next Friday”.</p>
+
+<div class="sources">
+  <h2><span class="no">10.</span>Sources</h2>
+  <ol>
+    <li><a href="https://eco.mtk.nao.ac.jp/koyomi/wiki/">National Astronomical
+    Observatory of Japan — <span class="jp">暦Wiki</span></a>, the calendar
+    office of Japan's national observatory. Its page on holidays after the Meiji
+    restoration is the source for the <span class="jp">一六日</span> system and
+    for Cabinet Order No. 27 of 12 March 1876, each entry linked to the original
+    decree in the National Diet Library. <strong>Read this one</strong> if you
+    read only one — it is a primary-document index, and it is where the usual
+    textbook version of this history turns out to be thinner than the truth.</li>
+    <li><a href="https://www.ndl.go.jp/koyomi/">National Diet Library —
+    <span class="jp">日本の暦</span></a>, “The Japanese Calendar”. The source for
+    the twelve traditional month names on the reference sheet, and honest that
+    their etymologies are <span class="jp">諸説あり</span> — disputed — rather
+    than settled.</li>
+    <li><a href="https://ja.wikipedia.org/wiki/%E6%9B%9C%E6%97%A5">ja.wikipedia,
+    <span class="jp">曜日</span></a> and
+    <a href="https://ja.wikipedia.org/wiki/%E5%AE%BF%E6%9B%9C%E7%B5%8C"><span class="jp">宿曜経</span></a>
+    — the transmission route: Amoghavajra's 759 translation, Kūkai carrying it to
+    Japan, the <span class="jp">具注暦</span> and
+    <span class="jp">御堂関白記</span>, and the Sogdian
+    <span class="jp">密</span> spelling of Sunday.</li>
+    <li><a href="https://jisho.org/">Jisho.org</a>, serving
+    <a href="https://www.edrdg.org/jmdict/j_jmdict.html">JMdict/EDICT</a> — every
+    reading and gloss on this page, and the check that caught the two readings in
+    section 5: an exact lookup of <span class="jp">一月</span> returns
+    <span class="jp">ひとつき</span> before <span class="jp">いちがつ</span>, and
+    <span class="jp">一日</span> returns <span class="jp">いちにち</span> before
+    <span class="jp">ついたち</span>.</li>
+    <li><a href="https://en.wiktionary.org/wiki/%D8%A7%D9%84%D8%A3%D8%B1%D8%A8%D8%B9%D8%A7%D8%A1">en.wiktionary,
+    <span class="ar-i">الأربعاء</span></a> — the vowelled forms of all seven
+    Arabic days, and the Syriac origin of the numbering along with the pre-Islamic
+    names it displaced.
+    <a href="https://en.wikipedia.org/wiki/Arabic_names_of_Gregorian_months">Arabic
+    names of Gregorian months</a> covers the two month systems and which regions
+    use which.</li>
+    <li><a href="https://www.madinaharabic.com/">Madinah Arabic</a> and
+    <a href="https://www.almaany.com/">Almaany</a> — the Arabic glosses and their
+    harakat.</li>
+    <li><a href="../reference/calendar.html">Calendar reference sheet</a> — the
+    seven days, all twelve months in Japanese and both Arabic systems, the full
+    1-to-31 date table, and the twelve traditional Japanese month names, laid out
+    to print. Its companion for the question words that ask about all of this is
+    the <a href="../reference/question-words.html">question-word sheet</a>.</li>
+  </ol>
+</div>
+
+</main>
+
+<script src="../assets/week-data.js"></script>
+<script src="../assets/vocab10-data.js"></script>
+<script src="../assets/course-map.js"></script>
+<script src="../assets/nav.js"></script>
+<script src="../assets/kana-panel-data.js"></script>
+<script src="../assets/kana-panel.js"></script>
+<script type="module" src="../assets/lang-switch.js"></script>
+<script type="module" src="../assets/speech.js"></script>
+<script type="module" src="../assets/week-grid.js"></script>
+<script type="module" src="../assets/vocab-list.js"></script>
+<script type="module" src="../assets/vocab-drill.js"></script>
+<script type="module" src="../assets/theme.js"></script>
+</body>
+</html>
