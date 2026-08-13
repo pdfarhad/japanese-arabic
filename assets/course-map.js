@@ -104,6 +104,26 @@ window.COURSE_MAP = {
     },
   ],
 
+  /* Reading chapters are a separate category on purpose — they are the
+     textbook's own pages reproduced line for line, not lessons built from the
+     day's notes, and numbering them among the lessons would say the course had
+     reached a chapter it has not. nav.js renders each group under its own
+     heading and gives it its own prev/next chain. */
+  groups: [
+    {
+      label: "Reading Chapters",
+      items: [
+        {
+          n: 1,
+          id: "0001-minna-no-nihongo-1-3",
+          title: "Minna no Nihongo I, lessons 1–3",
+          path: "reading/0001-minna-no-nihongo-1-3.html",
+          min: 25,
+        },
+      ],
+    },
+  ],
+
   reference: [
     { title: "Hiragana stroke chart", path: "reference/hiragana-chart.html" },
     { title: "Katakana stroke chart", path: "reference/katakana-chart.html" },

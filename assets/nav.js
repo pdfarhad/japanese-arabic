@@ -8,10 +8,21 @@
 // Progressive enhancement: no COURSE_MAP → no nav. Styles are self-injected
 // (CSS custom properties fall back sanely without the shared stylesheet).
 // Hidden in print. Honors prefers-reduced-motion.
+//
+// EXTRA CATEGORIES. Beside `lessons`, a course may declare `groups`: named
+// collections of pages that are NOT lessons and must not be numbered among them
+// — reading chapters, labs, practice decks. Each renders under its own heading
+// and is its OWN prev/next sequence, so "next" from a reading chapter is the
+// next reading chapter rather than lesson 14:
+//
+//   groups: [{ label: "Reading Chapters",
+//              items: [{ n: 1, id: "…", title: "…", path: "reading/….html", min: 25 }] }]
 
 (() => {
   const MAP = window.COURSE_MAP;
   if (!MAP || !Array.isArray(MAP.lessons)) return;
+
+  const GROUPS = (MAP.groups || []).filter((g) => Array.isArray(g.items) && g.items.length);
 
   // Paths in the map are workspace-root-relative, so they must be resolved
   // against the SITE root — which is not always the domain root. A GitHub Pages
@@ -22,6 +33,7 @@
   // Works at the domain root, under a sub-path, and over file://.
   const known = [
     ...MAP.lessons.map((l) => l.path),
+    ...GROUPS.flatMap((g) => g.items.map((i) => i.path)),
     ...(MAP.reference || []).map((r) => r.path),
     MAP.index || "index.html",
   ];
@@ -91,10 +103,15 @@
   const esc = (s) => String(s).replace(/[&<>"]/g,
     (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-  const lessonLis = MAP.lessons.map((l) =>
+  const itemLis = (items) => items.map((l) =>
     `<li class="${isCurrent(l) ? "current" : ""}"><a href="${rel(l.path)}">
       <span class="cnav-n">${l.n}</span><span>${esc(l.title)}</span>
       ${l.min ? `<span class="cnav-min">${l.min}m</span>` : ""}</a></li>`).join("");
+
+  const lessonLis = itemLis(MAP.lessons);
+
+  const groupLists = GROUPS.map((g) =>
+    `<p class="cnav-label">${esc(g.label)}</p><ol>${itemLis(g.items)}</ol>`).join("");
 
   const refLis = (MAP.reference || []).map((r) =>
     `<li${location.pathname.endsWith("/" + r.path) ? ' class="current"' : ""}>
@@ -103,9 +120,14 @@
   const extLis = (MAP.external || []).map((x) =>
     `<li><a href="${x.url}"><span class="cnav-n">↗</span><span>${esc(x.title)}</span></a></li>`).join("");
 
-  const idx = MAP.lessons.findIndex(isCurrent);
-  const prev = idx > 0 ? MAP.lessons[idx - 1] : null;
-  const next = idx >= 0 && idx < MAP.lessons.length - 1 ? MAP.lessons[idx + 1] : null;
+  // Prev/next runs within ONE sequence — the lessons, or the group the current
+  // page belongs to. Threading a reading chapter into the lesson chain would
+  // offer a "next" that changes what kind of thing you are reading.
+  const seq = [MAP.lessons, ...GROUPS.map((g) => g.items)]
+    .find((items) => items.some(isCurrent)) || MAP.lessons;
+  const idx = seq.findIndex(isCurrent);
+  const prev = idx > 0 ? seq[idx - 1] : null;
+  const next = idx >= 0 && idx < seq.length - 1 ? seq[idx + 1] : null;
   const nextNav = idx < 0 ? "" : `<div class="cnav-next">
     <span>${prev ? `<a href="${rel(prev.path)}">← ${prev.n}. ${esc(prev.title)}</a>` : ""}</span>
     <span>${next ? `<a href="${rel(next.path)}">${next.n}. ${esc(next.title)} →</a>` : ""}</span></div>`;
@@ -119,6 +141,7 @@
     <h2><a href="${rel(MAP.index || "index.html")}">${esc(MAP.title || "Course")}</a></h2>
     ${MAP.subtitle ? `<p class="cnav-sub">${esc(MAP.subtitle)}</p>` : ""}
     <p class="cnav-label">Lessons</p><ol>${lessonLis}</ol>
+    ${groupLists}
     ${refLis ? `<p class="cnav-label">Reference</p><ul>${refLis}</ul>` : ""}
     ${extLis ? `<p class="cnav-label">Links</p><ul>${extLis}</ul>` : ""}
     ${nextNav}`;

@@ -1,0 +1,155 @@
+/* romaji.css — putting the crutch down.
+ *
+ * NOTES.md has said since the course started that "romaji is a crutch with a
+ * deadline: show it now, plan to withdraw it once the kana are solid." Until now
+ * nothing on the page could act on that. The only reading that could be put away
+ * was the kana panel's, and that governs the panel's own chart — the lesson you
+ * are actually reading kept every reading printed whether you wanted it or not.
+ *
+ * ---- One class, and no renderer knows about it ----
+ *
+ * Everything here hangs off `ro-hide` on <html>. `romaji.js` sets it; nothing
+ * else in the workspace mentions it.
+ *
+ * That is the whole design. Romaji on these pages is drawn at runtime by nine
+ * components — vocab-list, one-day, kana-grid, yoon-grid, kosoado-grid,
+ * week-grid, kana-chart, kana-drill and kana-panel. A toggle that walked the DOM
+ * hiding what it found would need every one of them to re-check the flag when it
+ * mounts, and any component added later would silently miss it. A class on the
+ * root element inverts that: a component that mounts AFTER the toggle is already
+ * correct, knowing nothing. That covers the two cases most likely to break a
+ * DOM-walking version — the words-language switch, which rebuilds one-day and
+ * every vocabulary list from scratch, and a kana grid's detail view, which is
+ * built on click.
+ *
+ * ---- Three things this deliberately does NOT hide ----
+ *
+ * `.drill-choice-romaji` and `.drill-chip-romaji` — the recognition drill shows
+ * a kana and offers four romaji to choose between. There the romaji IS the
+ * question, not a crutch propping up reading, and hiding it leaves four blank
+ * buttons and an unplayable drill on lessons 3, 5, 8 and 9. Leaving it means the
+ * button is safe to press anywhere in the course; it cannot break a page.
+ *
+ * `.kp-romaji` — the kana panel has its own romaji layer, and keeps it. Two
+ * controls over two surfaces: the panel's three switches are a drill rack over a
+ * reference chart you pull out ("romaji off matches the two scripts against each
+ * other"), while this is "get the crutch out of what I am reading". Folding them
+ * together would cost the panel the rack.
+ *
+ * The Arabic transliteration — `.side-translit`, `.kana-word-translit`, and
+ * `.vw-translit` / `.od-wr` in the modes where they carry Arabic. That is a
+ * different thing for a different reader: it is there, per NOTES.md, "not for
+ * Farhad's benefit, but so the public site is readable by someone who does not
+ * read the Arabic script." Different audience, and no deadline.
+ *
+ * ---- Why this is a file of its own ----
+ *
+ * The rules are cross-cutting — they name classes from every component — so
+ * appending them to jp-ar.css looked right, and would have saved a <link> on 23
+ * pages. It does not work. `.drill-head` reserves right-hand padding at ≤620px
+ * so the drill tally does not slide under the fixed discs, and that reservation
+ * grows with the number of discs: jp-ar.css sets 34px for the hamburger alone,
+ * theme.css overrides it to 86px for two. The third disc needs 138px, and at
+ * equal specificity that is decided by source order — a rule in jp-ar.css would
+ * lose to theme.css. So the feature that adds the disc owns the reservation,
+ * from a file loaded after the one it overrides, exactly as theme.css already
+ * does. `scripts/wire_romaji.py` is what guarantees the link order.
+ */
+
+/* ---- the hide rules ---- */
+
+/* Inline runs inside a sentence: collapse them. `visibility` here would reserve
+   a gap the width of the reading in the middle of a paragraph, which reads as a
+   rendering fault rather than as a deliberate absence. */
+.ro-hide .romaji,
+.ro-hide .vw-grouproma,
+.ro-hide .od-w[data-lang="ja"] .od-wr { display: none; }
+
+/* Fixed slots in a grid or a card: reserve the space, never collapse it. This is
+   the rule NOTES.md already states for the kana panel — "a layer off leaves its
+   line reserved… a grid that does not move under the reader's finger, and
+   position memory that survives a toggle, is what it buys."
+
+   `.vw-romaji` is display:block, so collapsing it would take a line out of every
+   word card, change every card's height and reflow the entire vocabulary grid
+   under the reader. The same argument holds for every cell below it. */
+.ro-hide .vw:not(.is-ar) .vw-romaji,
+.ro-hide .vw.is-ar .vw-translit,
+.ro-hide .kana-cell-romaji,
+.ro-hide .kana-headline-romaji,
+.ro-hide .kana-word-romaji,
+.ro-hide .chart-cap-romaji,
+.ro-hide .ks-roma,
+.ro-hide .ks-colroma,
+.ro-hide .yo-roma,
+.ro-hide .yo-rowroma,
+.ro-hide .yo-colroma,
+.ro-hide .wk-roma { visibility: hidden; }
+
+/* The two `.vw` rules and the `.od-w` one above are the least obvious lines in
+   this file, and the easiest to "simplify" into a bug.
+ *
+ * `vocab-list.js` builds its card from five slots that are POSITIONS, not
+ * languages: headline word, its transliteration, the English, the other
+ * language's word, its transliteration. In Japanese mode `.vw-romaji` holds the
+ * romaji and `.vw-translit` the Arabic; in Arabic mode the two swap, and
+ * `.vw-romaji` holds the ARABIC transliteration. `one-day.js`'s word buttons
+ * flip the same way. So the mode has to be part of the selector — the card
+ * carries `is-ar`, the word button carries `data-lang`. A rule naming
+ * `.vw-romaji` on its own would hide the Arabic and leave the romaji standing on
+ * every Arabic-mode page, which is precisely backwards. */
+
+/* Grid column and row headers are included above on purpose. They are romaji,
+   and with them off the yōon and kosoado grids become genuine bare-kana charts —
+   which is the drill this feature exists for. The kana down the side and across
+   the top still label the grid, so nothing becomes unreadable. */
+
+/* ---- the button ---- */
+
+/* Matches nav.js's `.cnav-btn` and theme.css's `.theme-btn` exactly — same 42px
+   disc, same border, same shadow — and parks one gap further left. theme.css
+   says its pair "read as a pair because they are the only two controls fixed to
+   the page"; this makes three, evenly spaced on one row. */
+.ro-btn {
+  position: fixed;
+  top: 14px;
+  right: 118px;
+  z-index: 60;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border, #e5e0d2);
+  background: var(--card, #faf7ee);
+  color: var(--accent-ink, #0a4d92);
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+  transition: border-color .12s ease, transform .08s ease;
+}
+.ro-btn:hover { border-color: var(--accent, #0f62b7); }
+.ro-btn:active { transform: scale(.94); }
+
+/* nav.js reserves the top-right corner and its drawer sits at z-index 62. A
+   control at 60 must not float over an open drawer, so it leaves when one opens
+   — the same rule theme.css applies to its own disc. */
+.cnav-open .ro-btn { opacity: 0; pointer-events: none; }
+
+@media (max-width: 620px) {
+  /* The drill tally is the only right-aligned line in the course, so it is the
+     only thing that scrolls underneath the fixed discs. jp-ar.css reserves 34px
+     for the hamburger alone; theme.css raises it to 86px for two discs; three
+     need the width of all three plus their gaps. Source order is what makes this
+     win over theme.css's 86px — see the header. */
+  .drill-head { padding-right: 138px; }
+}
+
+@media print {
+  /* A control has no business on paper. Belt and braces alongside the button
+     never being rendered into the printed flow in the first place. */
+  .ro-btn { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ro-btn { transition: none; }
+}

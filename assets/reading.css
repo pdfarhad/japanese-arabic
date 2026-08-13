@@ -1,0 +1,293 @@
+/* reading.css — the look of a reading chapter.
+ *
+ * A reading chapter is a printed page reproduced, so this stylesheet has one job:
+ * make the line the unit. Every line is a row that holds its own text, its own
+ * play button and its own reveal, and nothing about a line is affected by the
+ * one above it.
+ *
+ * Loaded after style.css and jp-ar.css, and it borrows their `.say` button and
+ * `.ar-i` isolation rather than restating them. Every colour is a variable, so
+ * theme.css's Fuji palette reaches this page for free — a hardcoded plate here
+ * would go light-on-white the moment the theme lightens `--ink`.
+ *
+ * LIGHT-ONLY, like the rest of the course: no prefers-color-scheme block.
+ */
+
+/* ---------- chapter and section furniture ---------- */
+
+.rd-chapter { margin: var(--s-6) 0 0; }
+.rd-chapter:first-child { margin-top: var(--s-4); }
+
+.rd-chaphead {
+  border-bottom: 2px solid var(--border);
+  padding-bottom: var(--s-2);
+  margin-bottom: var(--s-4);
+}
+
+.rd-chapno {
+  font-family: var(--jp);
+  font-size: 1.5rem;
+  margin: 0;
+  color: var(--jp-ink);
+}
+
+.rd-chaptitle {
+  margin: var(--s-1) 0 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.rd-chaplede {
+  margin: var(--s-1) 0 0;
+  color: var(--muted);
+  font-size: .94rem;
+}
+
+.rd-sec { margin: var(--s-5) 0; }
+
+/* The Japanese name of the section and its English gloss are one heading, so
+   they can never be split across a page break or reordered by a stylesheet
+   that does not know about the pair. */
+.rd-sechead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-2);
+  margin: 0 0 var(--s-3);
+  padding-bottom: var(--s-1);
+  border-bottom: 1px solid var(--border);
+}
+
+.rd-secjp {
+  font-family: var(--jp);
+  font-size: 1.15rem;
+  letter-spacing: .18em;
+  color: var(--jp-ink);
+}
+
+.rd-secen {
+  font: 600 10.5px/1 var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* The conversation's own title, centred over it the way the book sets it. */
+.rd-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  margin: 0 0 var(--s-4);
+  text-align: center;
+}
+
+.rd-titlejp {
+  font-family: var(--jp);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--jp-ink);
+  line-height: 2.1;
+}
+
+.rd-titleen {
+  flex: 1 0 100%;
+  font-size: .88rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* The dotted rule the book uses for a scene change inside one conversation. */
+.rd-sep {
+  border-top: 1.5px dotted var(--border);
+  width: 60%;
+  margin: var(--s-4) auto;
+}
+
+/* ---------- the line ---------- */
+
+/* A numbered item and the ……answer under it. Kept together so a question and
+   its reply never land on opposite sides of a page break. */
+.rd-item {
+  margin: 0 0 var(--s-3);
+  break-inside: avoid;
+}
+
+/* Grid, and the reason is the phone. A wrapping flex row lets the two buttons
+   drop onto a line of their own as soon as the text is long, which on a 390px
+   screen happened to nearly every dialogue line and doubled the length of the
+   page. An explicit three-column grid keeps the buttons in a column of their
+   own at every width; the text column is `minmax(0, 1fr)` so a long line wraps
+   inside itself instead of widening the row. */
+.rd-line {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "lab jp acts"
+    "tx  tx tx";
+  align-items: baseline;
+  gap: var(--s-1) var(--s-2);
+  padding: .15rem 0;
+}
+
+.rd-line.is-open { background: var(--blue-bg); border-radius: 5px; }
+
+.rd-lab {
+  grid-area: lab;
+  min-width: 1.9rem;
+  font: 600 .85rem var(--mono);
+  color: var(--faint);
+}
+
+/* A speaker's name is Japanese and can carry ruby, so it needs the Japanese
+   face and the same line-height the text gets. */
+.has-sp .rd-lab {
+  font-family: var(--jp);
+  font-size: .95rem;
+  font-weight: 500;
+  color: var(--muted);
+  min-width: 6.5rem;
+  line-height: 2;
+}
+
+.rd-jp {
+  grid-area: jp;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--jp);
+  font-size: 1.06rem;
+  /* Room for the furigana. Ruby annotations are drawn above the line box, so a
+     normal 1.6 line-height lets them touch the line above. */
+  line-height: 2.15;
+  overflow-wrap: break-word;
+  color: var(--ink);
+}
+
+/* The book's own parenthetical, indented under the line it belongs to. */
+.is-paren .rd-jp {
+  font-size: .95rem;
+  color: var(--muted);
+  padding-left: var(--s-3);
+}
+
+.rd-jp ruby rt {
+  font-size: .48em;
+  font-weight: 500;
+  color: var(--muted);
+  /* Chrome sets ruby text tight against its base; a little space keeps small
+     kana legible over a dense kanji. */
+  transform: translateY(.12em);
+}
+
+.rd-lab ruby rt { font-size: .5em; color: var(--faint); }
+
+.rd-acts {
+  grid-area: acts;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+}
+
+/* Reveals the English, the Arabic and the note. Sized to sit level with the
+   round play button beside it without being mistaken for one. */
+.rd-tr {
+  flex: 0 0 auto;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--accent-ink);
+  border-radius: 999px;
+  padding: .18rem .5rem;
+  font: 600 10px/1.35 var(--mono);
+  letter-spacing: .04em;
+  cursor: pointer;
+}
+
+.rd-tr:hover { border-color: var(--accent); background: var(--blue-bg); }
+.rd-tr[aria-expanded="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+/* ---------- the reveal ---------- */
+
+.rd-tx {
+  grid-area: tx;
+  min-width: 0;
+  margin: var(--s-1) 0 var(--s-2);
+  padding: var(--s-2) var(--s-3);
+  border-left: 3px solid var(--blue-edge);
+  background: var(--card);
+  border-radius: 0 5px 5px 0;
+}
+
+.rd-tx p { margin: 0 0 var(--s-1); }
+.rd-tx p:last-child { margin-bottom: 0; }
+
+.rd-en { font-size: .98rem; }
+
+.rd-ar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--s-2);
+  font-size: 1.2rem;
+  color: var(--ar-ink);
+}
+
+.rd-ar .ar-i { font-size: 1em; line-height: 1.95; }
+
+.rd-at {
+  text-align: right;
+  font: .82rem/1.5 var(--mono);
+  color: var(--muted);
+}
+
+.rd-note {
+  padding-top: var(--s-1);
+  border-top: 1px dotted var(--border);
+  font-size: .88rem;
+  color: var(--muted);
+}
+
+/* ---------- phones ---------- */
+
+/* A speaker's name is allowed a wide, aligned column on a desktop because it
+   makes the turns scannable. On a phone that column is competing with the line
+   itself for about 190px, so it gives up its alignment and sizes to its own
+   text — 店員B： is five characters, not six and a half rem. */
+@media (max-width: 560px) {
+  .has-sp .rd-lab { min-width: 0; font-size: .88rem; }
+  .rd-jp { font-size: 1rem; }
+  .rd-line { gap: var(--s-1); }
+  .rd-tx { padding: var(--s-2); }
+}
+
+/* A button shown as a specimen inside prose — the how-to-read table naming the
+   controls, rather than a control you can press. */
+.rd-key {
+  display: inline-block;
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 999px;
+  padding: .12rem .45rem;
+  font: 600 10px/1.4 var(--mono);
+  color: var(--accent-ink);
+  white-space: nowrap;
+}
+
+/* ---------- print ---------- */
+
+/* What is on screen is what prints: an open line keeps its translation, a closed
+   one stays closed. Printing every translation would hand the reader the answers
+   to the page they meant to practise on. */
+@media print {
+  .rd-acts { display: none; }
+  .rd-line.is-open { background: none; }
+  .rd-tx { break-inside: avoid; }
+  .rd-chapter { break-before: page; }
+  .rd-chapter:first-child { break-before: auto; }
+}
