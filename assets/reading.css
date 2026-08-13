@@ -11,7 +11,32 @@
  * would go light-on-white the moment the theme lightens `--ink`.
  *
  * LIGHT-ONLY, like the rest of the course: no prefers-color-scheme block.
+ *
+ * ---- The Japanese is set larger than the Latin, deliberately ----
+ *
+ * Raised 2026-08-13 on Farhad's "at least 3 fonts larger". A kanji carries more
+ * strokes inside the same em box than any Latin letter, and this page prints it
+ * with furigana half that size on top, so type set to match the surrounding
+ * English is the size at which 銀行員 stops being readable and starts being
+ * guessed from context. Every Japanese run here — line, furigana, speaker name,
+ * section head, and the bare 第1課 in the prose — is at least 3px bigger than the
+ * body text it sits beside. Sizes are rem, so they are one number to move again;
+ * keep the ratios if they move, because the furigana is sized off its base.
  */
+
+/* ---------- Japanese inside the page's own prose ---------- */
+
+/* jp-ar.css gives `.jp` the Japanese face but no size, so a 地下1階 quoted in a
+   paragraph renders at the paragraph's size — visibly smaller than the same
+   characters in the chapter below, which is the one place a reader compares
+   them. The 1.2em bump is the argument `.ar-i` already makes for Arabic set in
+   Latin prose, applied to the other script. Scoped to reading pages: reading.css
+   is loaded by them alone.
+
+   The kicker needs its own number because it is a 12px uppercase mono label —
+   1.2em of that is still smaller than the body text. */
+.jp { font-size: 1.2em; }
+.kicker .jp { font-size: 1.3em; }
 
 /* ---------- chapter and section furniture ---------- */
 
@@ -26,7 +51,7 @@
 
 .rd-chapno {
   font-family: var(--jp);
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin: 0;
   color: var(--jp-ink);
 }
@@ -60,7 +85,7 @@
 
 .rd-secjp {
   font-family: var(--jp);
-  font-size: 1.15rem;
+  font-size: 1.42rem;
   letter-spacing: .18em;
   color: var(--jp-ink);
 }
@@ -85,7 +110,7 @@
 
 .rd-titlejp {
   font-family: var(--jp);
-  font-size: 1.15rem;
+  font-size: 1.42rem;
   font-weight: 600;
   color: var(--jp-ink);
   line-height: 2.1;
@@ -144,10 +169,12 @@
    face and the same line-height the text gets. */
 .has-sp .rd-lab {
   font-family: var(--jp);
-  font-size: .95rem;
+  font-size: 1.2rem;
   font-weight: 500;
   color: var(--muted);
-  min-width: 6.5rem;
+  /* Grown with the type: this column holds 店員B： with ruby over it, and a width
+     kept at the old 6.5rem would wrap the longest name onto two lines. */
+  min-width: 8.2rem;
   line-height: 2;
 }
 
@@ -156,9 +183,10 @@
   min-width: 0;
   margin: 0;
   font-family: var(--jp);
-  font-size: 1.06rem;
+  font-size: 1.32rem;
   /* Room for the furigana. Ruby annotations are drawn above the line box, so a
-     normal 1.6 line-height lets them touch the line above. */
+     normal 1.6 line-height lets them touch the line above. Kept as a RATIO when
+     the type grew, so the clearance grew with it. */
   line-height: 2.15;
   overflow-wrap: break-word;
   color: var(--ink);
@@ -166,13 +194,16 @@
 
 /* The book's own parenthetical, indented under the line it belongs to. */
 .is-paren .rd-jp {
-  font-size: .95rem;
+  font-size: 1.2rem;
   color: var(--muted);
   padding-left: var(--s-3);
 }
 
+/* The furigana is the reading you are here to learn, so it grew too — .54em of a
+   1.32rem base is ~11px, where the old .48em of 1.06rem was ~8px. Sized in `em`
+   so it stays tied to the line it annotates. */
 .rd-jp ruby rt {
-  font-size: .48em;
+  font-size: .54em;
   font-weight: 500;
   color: var(--muted);
   /* Chrome sets ruby text tight against its base; a little space keeps small
@@ -260,8 +291,8 @@
    itself for about 190px, so it gives up its alignment and sizes to its own
    text — 店員B： is five characters, not six and a half rem. */
 @media (max-width: 560px) {
-  .has-sp .rd-lab { min-width: 0; font-size: .88rem; }
-  .rd-jp { font-size: 1rem; }
+  .has-sp .rd-lab { min-width: 0; font-size: 1.1rem; }
+  .rd-jp { font-size: 1.24rem; }
   .rd-line { gap: var(--s-1); }
   .rd-tx { padding: var(--s-2); }
 }
