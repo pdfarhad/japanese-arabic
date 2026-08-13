@@ -213,6 +213,60 @@
 
 .rd-lab ruby rt { font-size: .5em; color: var(--faint); }
 
+/* ---------- a word ---------- */
+
+/* Every word in the line is a button that says itself. It has to stop looking
+   like one: a printed page with two hundred boxes on it is a form, not a page.
+   So the button gives up everything a button draws and keeps only a hairline
+   under the word — enough to say "these are separable" once, at page level, and
+   quiet enough to read past. `font: inherit` is load-bearing; without it Chrome
+   drops the word to 13px system sans and the line comes apart. */
+.rd-w {
+  font: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  /* A word that is longer than the column left to it still has to wrap inside
+     itself rather than push the page sideways — the phone column is ~230px and
+     マイク・ミラーさんですか。 is wider than that at this size. */
+  max-width: 100%;
+  cursor: pointer;
+  border-radius: 3px;
+  /* Dotted and warm-grey, not a rule: a solid line under all 235 words turns the
+     page into a worksheet of blanks. This is enough to say "separable" and
+     little enough to read past. */
+  text-decoration: underline dotted var(--border);
+  text-underline-offset: .32em;
+  text-decoration-thickness: 1px;
+  transition: background-color .12s ease, text-decoration-color .12s ease;
+}
+
+.rd-w:hover { background: var(--blue-bg); text-decoration-color: var(--accent); }
+.rd-w:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* speech.js adds `.speaking` for the length of the utterance, so the word you
+   pressed is the word you are hearing — the only feedback a play button gives on
+   a device whose voice takes a moment to start. */
+.rd-w.speaking {
+  background: var(--blue-bg);
+  color: var(--accent-ink);
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+}
+
+/* No Japanese voice on this device: the words go back to being text rather than
+   staying live-looking buttons that do nothing. */
+.rd-w.no-voice {
+  cursor: default;
+  text-decoration: none;
+  transition: none;
+}
+.rd-w.no-voice:hover { background: none; }
+
 .rd-acts {
   grid-area: acts;
   justify-self: end;
@@ -317,6 +371,8 @@
    to the page they meant to practise on. */
 @media print {
   .rd-acts { display: none; }
+  /* On paper a word is just a word — the dots are an invitation to tap. */
+  .rd-w { text-decoration: none; }
   .rd-line.is-open { background: none; }
   .rd-tx { break-inside: avoid; }
   .rd-chapter { break-before: page; }

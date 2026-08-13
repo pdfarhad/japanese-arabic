@@ -29,6 +29,26 @@
  * Those five are lesson 13's sound changes turning up in running text, which is why
  * they carry a `n` note rather than being silently corrected.
  *
+ * ---- `w`: the same problem, one word at a time ----
+ *
+ * Every word on the page is a button too, and reading.js cuts the line into words
+ * on the marks the book itself prints — the spacing, the brackets, the ・ in a
+ * foreign name, and the furigana. That covers all but the numerals, for exactly
+ * the reason above: 「9」 has nothing printed over it. `w` maps a printed word to
+ * its reading, and the readings here are the ones already checked for `say` and
+ * already explained in each line's note:
+ *
+ *   9歳 → きゅうさい · 「9」→ きゅう · 「7」→ なな · 408の → よんまるはちの
+ *   18,600円 → いちまんはっせんろっぴゃくえん · 地下1階 → ちかいっかい
+ *   2,500円 → にせんごひゃくえん
+ *
+ * A key is what the page PRINTS, marks off, and may span several cut words —
+ * that is how 地下1階 becomes one word again after the ruby splits it in three.
+ * けい子 is the one entry that is not about a numeral: the book annotates 子《こ》
+ * alone, so the cut would leave けい and 子 as separate words when the given name
+ * is one. test_reading.mjs fails on a key that matches nothing, so a typo here
+ * cannot pass quietly.
+ *
  * ---- Arabic ----
  *
  * Modern Standard Arabic with full harakat, and — where the course has already
@@ -51,7 +71,8 @@
  * archaic きざはし, which is why the counter reading has to come from the phrase.
  *
  * Fields per line: sp speaker · jp the line · en · ar · at · say audio override ·
- * n note · sep a dotted scene break · paren the book's own parenthetical.
+ * w per-word readings · n note · sep a dotted scene break · paren the book's own
+ * parenthetical.
  * A line carrying `i` starts a new numbered item; lines after it belong to it.
  */
 
@@ -218,6 +239,7 @@ window.READING1 = {
             {
               jp: "……9歳《さい》です。",
               say: "きゅうさいです。",
+              w: { "9歳": "きゅうさい" },
               en: "……I am nine.",
               ar: "عُمْرِي تِسْعُ سَنَوَاتٍ.",
               at: "ʿumrī tisʿu sanawāt",
@@ -281,6 +303,7 @@ window.READING1 = {
             {
               sp: "佐藤《さとう》",
               jp: "｜佐藤《さとう》けい子《こ》です。",
+              w: { "けい子": "けいこ" },
               en: "I am Keiko Sato.",
               ar: "أَنَا كِيكُو سَاتُو.",
               at: "anā Kīkū Sātū",
@@ -383,6 +406,7 @@ window.READING1 = {
               i: 4,
               jp: "これは「9」ですか、「7」ですか。",
               say: "これはきゅうですか、ななですか。",
+              w: { "9": "きゅう", "7": "なな" },
               en: "Is this a “9” or a “7”?",
               ar: "هَلْ هٰذَا تِسْعَةٌ أَمْ سَبْعَةٌ؟",
               at: "hal hādhā tisʿatun am sabʿa?",
@@ -391,6 +415,7 @@ window.READING1 = {
             {
               jp: "……「9」です。",
               say: "きゅうです。",
+              w: { "9": "きゅう" },
               en: "……It is a “9”.",
               ar: "هٰذَا تِسْعَةٌ.",
               at: "hādhā tisʿa",
@@ -469,6 +494,7 @@ window.READING1 = {
               sp: "サントス",
               jp: "408の　サントスです。",
               say: "よんまるはちのサントスです。",
+              w: { "408の": "よんまるはちの" },
               en: "I am Santos from 408.",
               ar: "أَنَا سَانْتُوس مِنَ الشَّقَّةِ ٤٠٨.",
               at: "anā Santōs mina sh-shaqqati 408",
@@ -649,6 +675,7 @@ window.READING1 = {
             {
               jp: "……18,600円《えん》です。",
               say: "いちまんはっせんろっぴゃくえんです。",
+              w: { "18,600円": "いちまんはっせんろっぴゃくえん" },
               en: "……18,600 yen.",
               ar: "بِثَمَانِيَةَ عَشَرَ أَلْفًا وَسِتِّمِائَةِ يِنٍّ.",
               at: "bi-thamāniyata ʿashara alfan wa-sittimiʾati yinn",
@@ -682,6 +709,7 @@ window.READING1 = {
               sp: "店員《てんいん》A",
               jp: "地下《ちか》1階《かい》です。",
               say: "ちかいっかいです。",
+              w: { "地下1階": "ちかいっかい" },
               en: "It is on basement floor 1.",
               ar: "فِي الطَّابِقِ الْأَوَّلِ تَحْتَ الْأَرْضِ.",
               at: "fī ṭ-ṭābiqi l-awwali taḥta l-arḍ",
@@ -737,6 +765,7 @@ window.READING1 = {
               sp: "店員《てんいん》B",
               jp: "2,500円《えん》です。",
               say: "にせんごひゃくえんです。",
+              w: { "2,500円": "にせんごひゃくえん" },
               en: "2,500 yen.",
               ar: "بِأَلْفَيْنِ وَخَمْسِمِائَةِ يِنٍّ.",
               at: "bi-alfayni wa-khamsimiʾati yinn",

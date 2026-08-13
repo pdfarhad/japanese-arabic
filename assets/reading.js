@@ -20,6 +20,22 @@
  * Both start closed. Nothing is revealed until it is asked for, because the whole
  * value of a reading page is the beat where you try the line yourself first.
  *
+ * ---- and every word in the line is a third button ----
+ *
+ * Tap a word, hear that word. The line button stays exactly as it was: the two
+ * are different questions — "how does this sentence run" and "what is that word"
+ * — and a reader stuck on one word should not have to sit through the sentence
+ * to hear it again.
+ *
+ * THE BOOK DOES THE CUTTING, NOT THIS FILE. Minna no Nihongo spaces a beginner's
+ * line into phrases, brackets the subjects it expects to be dropped, separates a
+ * foreign name with ・, and prints furigana over the words that carry kanji. Those
+ * four marks are already on the page, and a word is what falls between them.
+ * Inventing a boundary the book does not print would be this renderer stating a
+ * fact of its own, which is the one thing it may never do — and it would teach a
+ * lie the first time it split わたしは, because every speech engine reads a lone
+ * は as "ha". A particle stays with the word in front of it.
+ *
  * ---- Ruby ----
  *
  * Aozora Bunko's markup: 会社員《かいしゃいん》, and ｜ to mark the base by hand where
@@ -74,14 +90,115 @@ function withRuby(text) {
    typographic convention rather than a sound. The wide space becomes a normal
    one — Minna no Nihongo spaces its lines to show word boundaries to a learner,
    and that is not part of the utterance either. */
-function spoken(line) {
+export function spoken(line) {
   if (line.say) return line.say;
   return line.jp
     .replace(RUBY, (_, explicit, kanji, reading) => reading)
     .replace(/^……/, '')
-    .replace(/[［］「」｜]/g, '')
+    .replace(MARKS, '')
     .replace(/　/g, ' ')
     .trim();
+}
+
+/* ---------- the line, cut into words ---------- */
+
+/* The four marks the book prints, and nothing else. A gap is anything that is on
+   the page but not in the utterance-word before it: the spacing, the ellipsis
+   that opens an answer, and the ・ between a given name and a family one. */
+const GAP = /^(?:[　 ]+|……|・)/;
+/* A bracketed run is a unit the book itself sets apart — ［あなたは］ is one word
+   even though nothing inside it is spaced. */
+const BRACKET = /^(?:［[^］]*］|「[^」]*」|（[^）]*）)/;
+/* Anchored copy of RUBY: `g` regexes carry lastIndex between calls, and this one
+   is asked the same question at every character. */
+const RUBY_AT = new RegExp(`^(?:${RUBY.source})`);
+/* Punctuation closes the word it follows rather than opening the next one. */
+const CLOSERS = '、。？！';
+/* Kana that are read differently when they stand alone. Never cut one off. */
+const PARTICLE = /^[はへをがにもとのやか]{1,2}$/;
+/* The book's layout marks: printed, never said. ｜ is our own ruby marker, and
+   （…） is the book's footnote bracket around （では） — a voice reading the
+   parentheses aloud would turn a footnote into a word. */
+const MARKS = /[［］「」（）｜]/g;
+/* What a voice can say: kana, the長音 bar, iteration marks, and punctuation it
+   hears as a pause. A kanji or a digit left in here is a reading nobody checked. */
+const SAYABLE = /^[ぁ-ゖァ-ヺーゝゞ・、。？！\s]+$/;
+
+/* What the page PRINTS for a run of source: ruby resolved to its base, the
+   book's layout marks off. This is what `w` keys are written against, so a data
+   file can say { "地下1階": "ちかいっかい" } and read like the page. */
+const printed = src => src.replace(RUBY, (_, explicit, kanji) => explicit || kanji).replace(MARKS, '');
+
+/* Source in, an array of `{ gap }` and `{ src, say }` out — losslessly: joining
+   every part back together gives the line character for character, which is what
+   keeps a reproduction a reproduction. */
+function cut(jp) {
+  const out = [];
+  let buf = '';
+  const flush = () => { if (buf) { out.push({ src: buf }); buf = ''; } };
+
+  for (let i = 0; i < jp.length;) {
+    const rest = jp.slice(i);
+    let m = GAP.exec(rest);
+    if (m) { flush(); out.push({ gap: m[0] }); i += m[0].length; continue; }
+    m = BRACKET.exec(rest);
+    if (m) { flush(); out.push({ src: m[0] }); i += m[0].length; continue; }
+    /* Ruby travels with its base, always: 会社員《かいしゃいん》 is one word and
+       carries its own reading. */
+    m = RUBY_AT.exec(rest);
+    if (m) { flush(); out.push({ src: m[0], say: m[3] }); i += m[0].length; continue; }
+    buf += jp[i];
+    i += 1;
+    if (CLOSERS.includes(jp[i - 1])) flush();
+  }
+  flush();
+
+  /* A bare particle is not a word — it goes back onto the one before it. Say
+     first, then source: the reading of what is already there has to be taken
+     before the particle is appended to it. */
+  const joined = [];
+  for (const part of out) {
+    const prev = joined[joined.length - 1];
+    if (part.src && prev && prev.src && PARTICLE.test(printed(part.src))) {
+      prev.say = (prev.say ?? printed(prev.src)) + printed(part.src);
+      prev.src += part.src;
+    } else joined.push({ ...part });
+  }
+  return joined;
+}
+
+/* `w` — the escape hatch, and the only place a word's reading is written by
+   hand. It exists for the same reason `say` does: where the page prints a
+   numeral, the furigana cannot voice it. Keys are what is printed, so a key may
+   span several cut words (「9」 → きゅう, 地下1階 → ちかいっかい) and they are
+   matched longest-first. A key that matches nothing is a typo, and
+   test_reading.mjs fails on it rather than letting it pass silently. */
+function regroup(parts, w) {
+  if (!w) return parts;
+  const out = [];
+  let i = 0;
+  while (i < parts.length) {
+    if (parts[i].gap) { out.push(parts[i]); i += 1; continue; }
+    let end = 0;
+    for (let j = parts.length; j > i && !end; j--) {
+      const run = parts.slice(i, j);
+      if (run.some(p => p.gap)) continue;
+      const src = run.map(p => p.src).join('');
+      const key = printed(src);
+      if (Object.hasOwn(w, key)) { end = j; out.push({ src, say: w[key], key }); }
+    }
+    if (!end) { out.push(parts[i]); i += 1; } else i = end;
+  }
+  return out;
+}
+
+/* The words of a line, each with the text to print and the kana to say. */
+export function wordsOf(line) {
+  return regroup(cut(line.jp), line.w).map(part => {
+    if (part.gap) return part;
+    const say = (part.say ?? printed(part.src)).replace(MARKS, '');
+    return { ...part, say, speakable: SAYABLE.test(say) };
+  });
 }
 
 function sayButton(text, lang, label, speakable) {
@@ -118,6 +235,37 @@ function translation(line, id, arSpeakable) {
   return box;
 }
 
+/* The line as printed, with every word in it a button. The gaps between words are
+   text nodes, so the paragraph still reads out — and still prints — as the
+   book's own line, spacing included.
+
+   `tabindex="-1"` is deliberate: a chapter is over two hundred words, and putting
+   them all in the tab order would bury the two controls that matter — the line's
+   own 🔊 and its EN·AR — behind a walk through the whole page. They stay
+   reachable to a screen reader, which navigates by element rather than by tab.
+
+   A word the furigana cannot voice is rendered as plain text rather than as a
+   button that would say a reading nobody checked. With `w` filled in there are
+   none; the test asserts that, so the day a new chapter arrives with a numeral
+   in it the gap is a failure rather than a dead word. */
+function jpLine(line, speakable) {
+  const p = el('p', 'rd-jp');
+  p.lang = 'ja';
+  for (const part of wordsOf(line)) {
+    if (part.gap) { p.appendChild(document.createTextNode(part.gap)); continue; }
+    if (!part.speakable) { p.appendChild(withRuby(part.src)); continue; }
+    const b = el('button', 'rd-w');
+    b.type = 'button';
+    b.dataset.speak = part.say;
+    b.dataset.lang = 'ja';
+    b.setAttribute('tabindex', '-1');
+    if (!speakable) b.classList.add('no-voice');
+    b.appendChild(withRuby(part.src));
+    p.appendChild(b);
+  }
+  return p;
+}
+
 function lineRow(line, id, opts) {
   const row = el('div', 'rd-line');
   if (line.paren) row.classList.add('is-paren');
@@ -131,10 +279,7 @@ function lineRow(line, id, opts) {
   else if (line.sp) label.appendChild(withRuby(`${line.sp}：`));
   row.appendChild(label);
 
-  const jp = el('p', 'rd-jp');
-  jp.lang = 'ja';
-  jp.appendChild(withRuby(line.jp));
-  row.appendChild(jp);
+  row.appendChild(jpLine(line, opts.jaSpeakable));
 
   const acts = el('span', 'rd-acts');
   const txId = `tx-${id}`;

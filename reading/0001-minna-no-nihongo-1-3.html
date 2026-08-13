@@ -30,7 +30,8 @@ checked against <a href="https://jisho.org/">Jisho.org</a> · text from
 
 <p>Every line carries two buttons and both start closed. That is the whole
 design: the value of a reading page is the moment you try the line yourself,
-before anything helps you.</p>
+before anything helps you. The words themselves are the third control — tap any
+one of them to hear that word on its own.</p>
 
 <table>
   <thead><tr><th>Button</th><th>What it does</th><th>Use it when</th></tr></thead>
@@ -40,6 +41,13 @@ before anything helps you.</p>
       <td>Reads the line aloud in Japanese</td>
       <td>After you have tried to read it. Hearing it first turns the page into
       listening practice, which is a different exercise.</td>
+    </tr>
+    <tr>
+      <td><span class="jp">会社員</span> <em>the word itself</em></td>
+      <td>Says that one word</td>
+      <td>When the line ran away from you at a single word. The cut follows the
+      book's own spacing, brackets and furigana — never finer, so a particle is
+      always heard on the word it belongs to.</td>
     </tr>
     <tr>
       <td><span class="rd-key">EN·AR</span></td>
@@ -52,6 +60,13 @@ before anything helps you.</p>
       <td>Reads the Arabic aloud</td>
       <td>Every time — the Arabic is a second vocabulary here, not a gloss.</td>
     </tr>
+    <tr>
+      <td><span class="rd-key"><span class="jp">かな</span></span> <em>left edge</em></td>
+      <td>Slides out the kana chart, with hiragana, katakana and romaji on
+      switches of their own</td>
+      <td>When a character will not come. It is the same panel the lessons
+      carry, so it stays where your hand expects it.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -62,8 +77,9 @@ before anything helps you.</p>
   over the first two characters and <span class="jp">かい</span> over the last —
   but the line is said <span class="jp">ちかいっかい</span>, because
   <span class="jp">いち</span> and <span class="jp">かい</span> collide. The play
-  buttons say the whole line correctly. <strong>Seven lines carry a numeral the
-  furigana cannot voice</strong> — the two room and price lines, the two
+  buttons say the whole line correctly, and so does the word — a numeral is the
+  one place a reading is written out by hand rather than read off the furigana.
+  <strong>Seven lines carry a numeral the furigana cannot voice</strong> — the two room and price lines, the two
   handwritten digits, <span class="jp">9歳</span>, <span class="jp">408</span>
   and this one — and each says in its note how it is actually read.</p>
 </div>
@@ -113,6 +129,8 @@ before anything helps you.</p>
 <script src="../assets/reading1-data.js"></script>
 <script src="../assets/course-map.js"></script>
 <script src="../assets/nav.js"></script>
+<script src="../assets/kana-panel-data.js"></script>
+<script src="../assets/kana-panel.js"></script>
 <script type="module" src="../assets/speech.js"></script>
 <script type="module" src="../assets/reading.js"></script>
 <script type="module" src="../assets/theme.js"></script>
