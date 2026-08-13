@@ -351,18 +351,11 @@
   .rd-tx { padding: var(--s-2); }
 }
 
-/* A button shown as a specimen inside prose — the how-to-read table naming the
-   controls, rather than a control you can press. */
-.rd-key {
-  display: inline-block;
-  border: 1px solid var(--border);
-  background: var(--card);
-  border-radius: 999px;
-  padding: .12rem .45rem;
-  font: 600 10px/1.4 var(--mono);
-  color: var(--accent-ink);
-  white-space: nowrap;
-}
+/* `.rd-key` — the specimen-button pill used by the how-to-read table — MOVED TO
+   jp-ar.css on 2026-08-13, when the flash-card deck became the second page type
+   with a how-to-use table. It is not a reading-chapter idea, and duplicating it
+   into flashcards.css would have left two copies to keep in step. reading.css
+   loads after jp-ar.css, so nothing on this page changed. */
 
 /* ---------- print ---------- */
 

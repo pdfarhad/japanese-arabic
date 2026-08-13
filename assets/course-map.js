@@ -122,6 +122,22 @@ window.COURSE_MAP = {
         },
       ],
     },
+    /* Practice is the third category, and the reasoning is the reading
+       chapters' exactly: a deck teaches nothing new — every word on it was
+       already taught in a numbered lesson — so numbering it 14 would claim the
+       course had reached a fourteenth chapter of the notes. */
+    {
+      label: "Practice",
+      items: [
+        {
+          n: 1,
+          id: "flash-cards",
+          title: "Flash Cards — chapters 10–13",
+          path: "practice/flash-cards.html",
+          min: 15,
+        },
+      ],
+    },
   ],
 
   reference: [

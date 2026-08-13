@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice · Flash Cards, chapters 10–13</title>
+<meta name="description" content="A flip-card deck over every word in chapters 10 to 13 — 178 words, thirty a session, dealt fresh each time, and it remembers which ones keep catching you out.">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/jp-ar.css">
+<link rel="stylesheet" href="../assets/flashcards.css">
+<link rel="stylesheet" href="../assets/theme.css">
+<script>try{var t=localStorage.getItem('jp-ar:theme');if(t==='fuji')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body data-lesson="flash-cards">
+<main>
+
+<p class="kicker">Practice · <span class="jp">ふくしゅう</span> — chapters 10 to 13</p>
+<h1>Flash Cards</h1>
+<p class="lede">A practice deck, not a lesson. Nothing here is new — every word
+was taught, glossed and checked in its own chapter. This page exists to stop
+them slipping away again.</p>
+<p class="meta">178 words · four chapters · 30 a session, dealt fresh every time
+you load the page · it remembers what you miss, in this browser only</p>
+
+<p class="voice-warning" data-voice-warning hidden></p>
+
+<h2><span class="no">1.</span>How to use it</h2>
+
+<p>The card shows one side. You retrieve the rest <em>before</em> you turn it —
+that beat, where nothing on screen is helping you, is the entire exercise. Then
+you tell it the truth.</p>
+
+<table>
+  <thead><tr><th>Control</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Front</strong> — Mixed · <span class="jp">かな</span> ·
+      English · <span class="ar-i" lang="ar" dir="rtl">العربية</span></td>
+      <td>Which side you are asked from. The back always shows all three.
+      <strong>Mixed is the default and the one to use</strong>: it picks a
+      different side per card, so you cannot settle into one direction.</td>
+    </tr>
+    <tr>
+      <td><strong>Chapters</strong></td>
+      <td>Which chapters are in play. All four on is the point of the page —
+      the words were learned in blocks and have to survive being shuffled.</td>
+    </tr>
+    <tr>
+      <td><strong>Fresh session</strong></td>
+      <td>Thirty cards drawn from everything in scope, weighted so the ones
+      you keep missing come round more often.</td>
+    </tr>
+    <tr>
+      <td><strong>Trouble words</strong></td>
+      <td>Only the words currently catching you out, hardest first. Greyed
+      until there are some.</td>
+    </tr>
+    <tr>
+      <td><span class="rd-key">space</span></td>
+      <td>Turns the card. <span class="rd-key">1</span> is <em>Knew it</em>,
+      <span class="rd-key">2</span> is <em>Missed it</em> — and neither key
+      does anything until the card is turned, so a stray press cannot cost you
+      a word.</td>
+    </tr>
+    <tr>
+      <td><span class="rd-key">🔊</span></td>
+      <td>Says the Japanese, or the Arabic. The card speaks itself the moment
+      you turn it — never before, or hearing it would be the answer.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <p class="title">Be honest with <em>Missed it</em></p>
+  <p>Half-remembering counts as missing. The deck is only as useful as the
+  record you give it, and the cost of an honest miss is that the word comes back
+  — which is what you want. The cost of a generous <em>Knew it</em> is that it
+  does not.</p>
+</div>
+
+<h2><span class="no">2.</span>The deck</h2>
+
+<div id="flashcards">
+  <p><em>The deck needs JavaScript. Every word in it is listed in
+  <a href="../lessons/0010-days-and-months.html">lesson 10</a>,
+  <a href="../lessons/0011-introducing-yourself.html">lesson 11</a>,
+  <a href="../lessons/0012-this-that-and-that-over-there.html">lesson 12</a> and
+  <a href="../lessons/0013-how-much-and-which-floor.html">lesson 13</a>, with
+  its full card and its note.</em></p>
+</div>
+
+<h2><span class="no">3.</span>What it remembers, and where</h2>
+
+<p>Each card carries a <strong>wrong-score</strong>. Missing it adds one, up to
+five. Knowing it takes one off, down to zero. That score is all the weighting
+runs on:</p>
+
+<table>
+  <thead><tr><th>Card</th><th>How often it comes up</th></tr></thead>
+  <tbody>
+    <tr><td>Never seen</td><td>2.5×</td></tr>
+    <tr><td>Seen, score 0</td><td>1× — the baseline</td></tr>
+    <tr><td>Score 1</td><td>3×</td></tr>
+    <tr><td>Score 3</td><td>7×</td></tr>
+    <tr><td>Score 5 — the ceiling</td><td>11×</td></tr>
+  </tbody>
+</table>
+
+<p><strong>The decay is the important half.</strong> Without it, a word you
+fumbled once in July would still be crowding the deck in December, and the
+trouble list would slowly become the whole course. Getting it right twice gets
+it out.</p>
+
+<p>Your lifetime counts — how many times known, how many missed — never decay.
+They are shown on the back of a card you have met before, and they break ties in
+the trouble list.</p>
+
+<div class="callout warn">
+  <p class="title">Where this is stored</p>
+  <p>In this browser, in <code>localStorage</code>, under one key. It is never
+  sent anywhere — there is no account, no server and no sync, which is also why
+  it does not follow you to your phone. Clearing your browser data clears it,
+  and <em>Forget my history</em> at the end of a session clears it deliberately.
+  If storage is blocked — Safari private browsing does this — the deck still
+  works and simply stops remembering.</p>
+</div>
+
+<h2><span class="no">4.</span>Where these words come from</h2>
+
+<p>Four chapters, kept as four separate sets rather than poured into one. A set
+whose premise is <em>“the words of chapter 12”</em> would stop being true the
+moment chapter 13 was appended to it.</p>
+
+<table>
+  <thead><tr><th>Chapter</th><th>Words</th><th>What it covers</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><a href="../lessons/0010-days-and-months.html">Lesson 10</a></td>
+      <td>53</td>
+      <td>The calendar — seven planets, twelve numbered months</td>
+    </tr>
+    <tr>
+      <td><a href="../lessons/0011-introducing-yourself.html">Lesson 11</a></td>
+      <td>42</td>
+      <td>Introducing yourself — two ways to say every person</td>
+    </tr>
+    <tr>
+      <td><a href="../lessons/0012-this-that-and-that-over-there.html">Lesson 12</a></td>
+      <td>42</td>
+      <td>Pointing — <span class="jp">これ・それ・あれ</span> and the
+      <span class="jp">の</span> row</td>
+    </tr>
+    <tr>
+      <td><a href="../lessons/0013-how-much-and-which-floor.html">Lesson 13</a></td>
+      <td>41</td>
+      <td>Places, floors and prices</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A word that appears in two chapters is dealt once, from the earlier one, so a
+session never asks you the same thing twice.</p>
+
+<div class="sources">
+  <h2><span class="no">5.</span>Sources</h2>
+  <ol>
+    <li><a href="https://www.gwern.net/Spaced-repetition">Spaced repetition</a>,
+    Gwern Branwen — <strong>read this one</strong> if you read only one. It is
+    the argument for why a deck that shows you what you keep missing beats a
+    deck that shows you everything equally, and why self-rating honestly matters
+    more than the algorithm does.</li>
+    <li><a href="https://pubmed.ncbi.nlm.nih.gov/17470412/">Roediger &amp;
+    Karpicke, <em>Test-Enhanced Learning</em></a> (2006) — the retrieval-practice
+    finding this page is built on: being tested on material beats re-reading it,
+    and the gap widens the longer you wait to measure.</li>
+    <li><a href="https://en.wikipedia.org/wiki/Interleaving_(learning)">Interleaving</a>
+    — why <em>Mixed</em> is the default front, and why all four chapters on is
+    better practice than one chapter at a time even though it feels worse.</li>
+    <li><a href="https://jisho.org/">Jisho.org</a>, over
+    <a href="https://www.edrdg.org/jmdict/j_jmdict.html">JMdict/EDICT</a> (CC
+    BY-SA 4.0) — every reading, gloss and commonness tag on every card, checked
+    when its chapter was built.</li>
+    <li>The cards themselves are the four lessons' own word sets, unchanged.
+    Nothing on this page was re-glossed for it.</li>
+  </ol>
+</div>
+
+</main>
+
+<script src="../assets/vocab10-data.js"></script>
+<script src="../assets/vocab11-data.js"></script>
+<script src="../assets/vocab12-data.js"></script>
+<script src="../assets/vocab13-data.js"></script>
+<script src="../assets/flashcard-sets.js"></script>
+<script src="../assets/course-map.js"></script>
+<script src="../assets/nav.js"></script>
+<script src="../assets/kana-panel-data.js"></script>
+<script src="../assets/kana-panel.js"></script>
+<script type="module" src="../assets/speech.js"></script>
+<script type="module" src="../assets/flashcards.js"></script>
+<script type="module" src="../assets/theme.js"></script>
+</body>
+</html>

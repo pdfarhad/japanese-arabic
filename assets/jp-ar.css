@@ -87,6 +87,21 @@
   margin: 0 0 var(--s-4);
 }
 
+/* A control shown as a specimen inside prose — a how-to-use table naming the
+   buttons and keys, rather than a control you can press. Lived in reading.css
+   until 2026-08-13, when the flash-card deck became the second page type to
+   need one; it was never a reading-chapter idea. */
+.rd-key {
+  display: inline-block;
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 999px;
+  padding: .12rem .45rem;
+  font: 600 10px/1.4 var(--mono);
+  color: var(--accent-ink);
+  white-space: nowrap;
+}
+
 /* ---------- hiragana chart ---------- */
 
 /* Prefix match, so a lesson carrying more than one chart (day 9 has the gojūon
