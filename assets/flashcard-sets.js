@@ -50,4 +50,10 @@ window.FLASHCARD_SETS = [
     label: "Places, floors and prices",
     lesson: "lessons/0013-how-much-and-which-floor.html",
   },
+  {
+    global: "VOCAB14",
+    n: 14,
+    label: "The working day",
+    lesson: "lessons/0014-the-working-day.html",
+  },
 ];

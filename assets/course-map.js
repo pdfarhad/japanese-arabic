@@ -102,6 +102,13 @@ window.COURSE_MAP = {
       path: "lessons/0013-how-much-and-which-floor.html",
       min: 22,
     },
+    {
+      n: 14,
+      id: "0014-the-working-day",
+      title: "The working day, and the clock",
+      path: "lessons/0014-the-working-day.html",
+      min: 22,
+    },
   ],
 
   /* Reading chapters are a separate category on purpose — they are the
@@ -132,7 +139,7 @@ window.COURSE_MAP = {
         {
           n: 1,
           id: "flash-cards",
-          title: "Flash Cards — chapters 10–13",
+          title: "Flash Cards — chapters 10–14",
           path: "practice/flash-cards.html",
           min: 15,
         },
