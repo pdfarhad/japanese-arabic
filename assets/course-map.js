@@ -139,7 +139,7 @@ window.COURSE_MAP = {
         {
           n: 1,
           id: "flash-cards",
-          title: "Flash Cards — chapters 10–14",
+          title: "Flash Cards — chapters 10–14 and the counters",
           path: "practice/flash-cards.html",
           min: 15,
         },

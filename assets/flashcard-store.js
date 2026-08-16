@@ -71,7 +71,15 @@ export function buildPool(sets, lookup) {
          twice in one session — with two different notes attached. */
       if (seen.has(w.k)) continue;
       seen.add(w.k);
-      out.push({ ...w, set: set.global, chapter: set.n, catLabel: catLabels.get(w.c) || '' });
+      out.push({
+        ...w,
+        set: set.global,
+        chapter: set.n,
+        /* What the card's back calls its source. A numbered chapter says
+           "Chapter 12"; a set that is not a chapter says what it is. */
+        chip: set.chip || `Chapter ${set.n}`,
+        catLabel: catLabels.get(w.c) || '',
+      });
     }
   }
   return out;

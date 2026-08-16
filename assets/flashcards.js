@@ -2,8 +2,9 @@
  * flashcard-store.js; this file only draws.
  *
  * Mount point: <div id="flashcards"></div>. It reads `window.FLASHCARD_SETS`
- * and the vocabulary globals that registry names, so a page adds a chapter by
- * loading one more data file — there is nothing to configure here.
+ * and the vocabulary globals that registry names, so a page adds a set by
+ * loading one more data file — there is nothing to configure here. A set need
+ * not be a numbered chapter: `short` and `chip` let one say what it is instead.
  *
  * ---- Why this is a flip-card and not a fourth multiple-choice drill ----
  *
@@ -83,7 +84,10 @@ export function mountFlashcards(root) {
   let stats = loadStats();
   let frontId = 'mixed';
   let mode = 'fresh';
-  const chapters = new Set(sets.map((s) => s.n));
+  /* Keyed on the GLOBAL's name, not on a chapter number. The deck was built when
+     every set was a numbered chapter, and the counter set is not one — giving it
+     a fake chapter number would have put a lie in the data to save a rename. */
+  const active = new Set(sets.map((s) => s.global));
 
   root.textContent = '';
   root.classList.add('fc-mounted');
@@ -109,23 +113,26 @@ export function mountFlashcards(root) {
 
   const chapWrap = el('div', 'fc-chapters');
   chapWrap.setAttribute('role', 'group');
-  chapWrap.setAttribute('aria-label', 'Which chapters to draw from');
-  chapWrap.appendChild(el('span', 'vd-catlabel', 'Chapters:'));
+  chapWrap.setAttribute('aria-label', 'Which sets to draw from');
+  chapWrap.appendChild(el('span', 'vd-catlabel', 'In play:'));
   const chapLabels = sets.map((s) => {
-    const count = pool.filter((c) => c.chapter === s.n).length;
+    /* Counted off the DEDUPED pool, so a set whose words are already dealt by an
+       earlier one reports what it actually contributes rather than what it
+       contains. The counter set holds 31 readings and adds 18. */
+    const count = pool.filter((c) => c.set === s.global).length;
     const lab = el('label', 'fc-chapbox on');
     const box = el('input');
     box.type = 'checkbox';
     box.checked = true;
-    box.value = String(s.n);
+    box.value = s.global;
     box.addEventListener('change', () => {
-      if (box.checked) chapters.add(s.n); else chapters.delete(s.n);
+      if (box.checked) active.add(s.global); else active.delete(s.global);
       paintControls();
       start();
     });
-    lab.append(box, el('span', 'fc-chapnum', String(s.n)),
+    lab.append(box, el('span', 'fc-chapnum', s.short || String(s.n)),
                el('span', 'fc-chapname', `${s.label} · ${count}`));
-    lab.dataset.chapter = String(s.n);
+    lab.dataset.set = s.global;
     chapWrap.appendChild(lab);
     return lab;
   });
@@ -194,7 +201,7 @@ export function mountFlashcards(root) {
   let missed = [];
   let flipped = false;
 
-  const inChapters = () => pool.filter((c) => chapters.has(c.chapter));
+  const inScope = () => pool.filter((c) => active.has(c.set));
 
   function frontFor(entry) {
     if (frontId !== 'mixed') return FRONTS.find((f) => f.id === frontId);
@@ -205,11 +212,11 @@ export function mountFlashcards(root) {
 
   function paintControls() {
     segButtons.forEach((b) => b.classList.toggle('on', b.dataset.front === frontId));
-    chapLabels.forEach((l) => l.classList.toggle('on', chapters.has(Number(l.dataset.chapter))));
+    chapLabels.forEach((l) => l.classList.toggle('on', active.has(l.dataset.set)));
     freshBtn.classList.toggle('on', mode === 'fresh');
     troubleBtn.classList.toggle('on', mode === 'trouble');
 
-    const scope = inChapters();
+    const scope = inScope();
     const trouble = troubleDeck(scope, stats, Infinity);
     const seen = scope.filter((c) => stats[cardKey(c)]).length;
 
@@ -219,7 +226,7 @@ export function mountFlashcards(root) {
       : 'Trouble words';
 
     strip.textContent = scope.length === 0
-      ? 'No chapters selected.'
+      ? 'Nothing selected.'
       : trouble.length
         ? `${scope.length} words in play · ${seen} met · ${trouble.length} still catching you out.`
         : seen
@@ -276,7 +283,7 @@ export function mountFlashcards(root) {
     back.append(headline, en, ar);
 
     const where = el('p', 'fc-back-meta');
-    where.append(el('span', 'fc-chip', `Chapter ${entry.chapter}`));
+    where.append(el('span', 'fc-chip', entry.chip));
     /* The separator is a real character, not the flex `gap`. A CSS-only gap
        reads as "Chapter 11Asking about a person" the moment the stylesheet is
        late, overridden or stripped — which is how it was first noticed here,
@@ -400,7 +407,7 @@ export function mountFlashcards(root) {
   /* `set` is the end-of-session "turn those again" list; otherwise the session is
      dealt fresh from the chapters in scope. */
   function start(set) {
-    const scope = inChapters();
+    const scope = inScope();
     at = 0;
     right = 0;
     missed = [];
@@ -410,7 +417,7 @@ export function mountFlashcards(root) {
       queue = [];
       stage.classList.remove('shown');
       done.classList.remove('shown');
-      empty.textContent = 'Tick at least one chapter to deal a session.';
+      empty.textContent = 'Tick at least one set to deal a session.';
       empty.classList.add('shown');
       count.textContent = '';
       barFill.style.width = '0%';

@@ -12,6 +12,11 @@
  *   2. one <script src="../assets/vocabNN-data.js"></script> on
  *      practice/flash-cards.html, above flashcards.js.
  *
+ * A set that is NOT a numbered chapter adds three optional fields — `short`
+ * (the checkbox badge), `chip` (what a card's back calls its source) and
+ * `files` (where its data lives, if not `vocabNN-data.js`). The counter set is
+ * the first of those; see the entry at the bottom.
+ *
  * Then re-run `node scripts/test_flashcards.mjs`, which counts the pool against
  * the sets and will fail if the script tag was forgotten — a registered set
  * whose global never loads is otherwise invisible, because `buildPool` skips
@@ -55,5 +60,19 @@ window.FLASHCARD_SETS = [
     n: 14,
     label: "The working day",
     lesson: "lessons/0014-the-working-day.html",
+  },
+  /* NOT A CHAPTER, and the first entry that is not. `short` is what the checkbox
+     badge shows in place of a chapter number and `chip` is what a card's back
+     calls its source — both exist so this set did not have to be given a fake
+     chapter 15 to fit a field it does not have.
+     `files` names its data because the file is not `vocab15-data.js`. */
+  {
+    global: "VOCABC",
+    n: 15,
+    short: "±",
+    chip: "Counters",
+    label: "Counters that change",
+    files: ["counter-cards-data.js"],
+    lesson: "reference/counters.html",
   },
 ];
