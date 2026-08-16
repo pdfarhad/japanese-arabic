@@ -1804,3 +1804,161 @@ span.mn-pic-letters-1 { font-size: 4.6rem; }
 @media print {
   .kp { display: none !important; }
 }
+
+/* ---------- counter sheet ---------- */
+
+/* reference/counters.html. Every counter the course has taught, 1–10 plus 何,
+   rendered by counter-grid.js from counter-data.js.
+
+   The table is eight columns wide, which is more than a phone can hold. It
+   scrolls INSIDE its own box — style.css already gives every table
+   `display:block; overflow-x:auto`, so nothing here needs to fight it and the
+   page itself never scrolls sideways. On paper `display:table` comes back and
+   all eight columns print, which is the point of owning the sheet.
+
+   The changed cells carry their flag character in the MARKUP (see
+   counter-grid.js), so the colour below is reinforcement, never the only
+   signal — this sheet exists to be printed, often in greyscale. */
+
+/* A sound change written as `X → Y` must never break across lines: a small っ
+   that wraps away from its base renders as "は っ", which is a different and
+   wrong thing. Used wherever a transformation is quoted in prose. */
+.nw { white-space: nowrap; }
+
+.ct-caption {
+  font: 600 11px/1.5 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin: var(--s-4) 0 var(--s-2);
+  padding-left: 9px;
+  border-left: 3px solid var(--green);
+}
+.ct-caption.is-shifty { border-left-color: var(--wrong-ink); color: var(--wrong-ink); }
+.ct-caption.is-steady { color: var(--green); }
+
+.ct-table { font-size: .9em; }
+.ct-table th, .ct-table td { padding: 7px 9px; vertical-align: top; }
+
+.ct-numhead, .ct-num {
+  font: 600 12px/1.4 var(--mono);
+  color: var(--faint);
+  text-align: right;
+  white-space: nowrap;
+  width: 1%;
+}
+.ct-qrow .ct-num { color: var(--accent-ink); font-size: 1.05rem; }
+.ct-qrow td { border-top: 2px solid var(--border); }
+
+.ct-head { min-width: 0; }
+.ct-head-jp {
+  display: block;
+  font-family: var(--jp);
+  font-size: 1.15rem;
+  color: var(--jp-ink);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.ct-head-en {
+  display: block;
+  font: 500 10px/1.4 var(--mono);
+  color: var(--muted);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-top: 2px;
+}
+/* The classification the sheet turns on, printed on the column it describes. */
+.ct-first {
+  display: block;
+  margin-top: 4px;
+  font: 500 9px/1.4 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.ct-first.is-vowel,
+.ct-first.is-voiced { color: var(--green); }
+.ct-first.is-voiceless { color: var(--wrong-ink); }
+
+.ct-cell { min-width: 0; }
+.ct-cell.is-changed { background: var(--wrong-bg); }
+
+.ct-say {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  min-width: 0;
+}
+.ct-say:hover .ct-jp { color: var(--accent-ink); }
+.ct-say:active { transform: scale(.97); }
+.ct-say.no-voice { cursor: default; }
+
+.ct-jp {
+  font-family: var(--jp);
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--jp-ink);
+  white-space: nowrap;
+}
+/* The flag is the kana that did the changing, not an abstract symbol — so the
+   pattern is legible at a glance and survives the stylesheet being stripped. */
+.ct-flag {
+  font-family: var(--jp);
+  font-size: .72em;
+  color: var(--wrong-ink);
+  font-weight: 700;
+}
+.ct-ro { display: block; font-size: .78em; }
+.ct-alt {
+  display: block;
+  font: 500 10px/1.5 var(--mono);
+  color: var(--faint);
+  white-space: nowrap;
+}
+.ct-alt-jp { font-family: var(--jp); font-size: 1.15em; }
+
+/* ---------- counter notes ---------- */
+
+.cn-list { display: grid; gap: var(--s-3); margin: var(--s-4) 0 var(--s-5); }
+.cn-list > * { min-width: 0; }
+
+.cn-item {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green);
+  border-radius: 8px;
+  background: var(--card);
+  padding: var(--s-3);
+  min-width: 0;
+}
+.cn-item.is-voiceless { border-left-color: var(--wrong-ink); }
+
+.cn-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+  margin: 0 0 4px;
+  min-width: 0;
+}
+.cn-head > * { min-width: 0; }
+.cn-jp { font-family: var(--jp); font-size: 1.4rem; color: var(--jp-ink); }
+.cn-kanji { font-family: var(--jp); font-size: 1.15rem; color: var(--muted); }
+.cn-en { font-size: .95rem; color: var(--ink); }
+
+.cn-meta { font: 500 11px/1.5 var(--mono); color: var(--faint); margin: 0 0 var(--s-2); }
+.cn-note { margin: 0; font-size: .95rem; line-height: 1.6; color: var(--muted); }
+.cn-note strong { color: var(--ink); }
+
+@media print {
+  /* The flag characters carry the meaning on paper, so the plate is dropped —
+     it prints as a grey wash that makes the kana harder to read for no gain. */
+  .ct-cell.is-changed { background: none; }
+  .cn-item { break-inside: avoid; }
+  /* A group caption stranded at the foot of a page, with its table overleaf,
+     says nothing at all. Found by printing the sheet to PDF and looking. */
+  .ct-caption { break-after: avoid; }
+}

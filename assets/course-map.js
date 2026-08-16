@@ -156,6 +156,7 @@ window.COURSE_MAP = {
     { title: "Question words", path: "reference/question-words.html" },
     { title: "The calendar", path: "reference/calendar.html" },
     { title: "One day, every word", path: "reference/one-day.html" },
+    { title: "Counters and their sound changes", path: "reference/counters.html" },
     { title: "Classroom phrasebook", path: "reference/classroom-phrases.html" },
   ],
 
