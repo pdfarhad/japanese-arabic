@@ -109,6 +109,13 @@ window.COURSE_MAP = {
       path: "lessons/0014-the-working-day.html",
       min: 22,
     },
+    {
+      n: 15,
+      id: "0015-numbers-and-counting",
+      title: "Numbers, and the two ways of counting",
+      path: "lessons/0015-numbers-and-counting.html",
+      min: 24,
+    },
   ],
 
   /* Reading chapters are a separate category on purpose — they are the

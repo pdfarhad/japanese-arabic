@@ -1,4 +1,4 @@
-/* counter-data.js — the seven counters the course has taught, 1 to 10 plus 何.
+/* counter-data.js — the eight counters the course has taught, 1 to 10 plus 何.
  *
  * `counter-grid.js` renders it into `reference/counters.html`. Edit here, nowhere
  * else. `scripts/check_counters.py` verifies every cell against the rule its own
@@ -18,7 +18,27 @@
  *   〜かい, 〜さい, 〜ふん begin voiceless → these are the ones that change.
  *
  * That is why 〜じ is free and 〜ふん is not, and it predicts the next counter
- * before it is taught. `first` on each entry records it.
+ * before it is taught. `first` on each entry records it. It predicted 〜にん
+ * correctly before chapter 15 wrote it out: に is a nasal, so nothing can
+ * happen, and nothing does.
+ *
+ * READ FROM THE NUMBER'S SIDE IT IS THE SAME RULE, and chapter 15 states it
+ * that way round because a learner meets the number first:
+ *
+ *   2, 5, 7, 9 end in a VOWEL  → they never change anything. Exceptionless
+ *                                across all eight counters here, and asserted
+ *                                by check_counters.py.
+ *   1, 6, 8, 10 end in ち/く/う → they collapse to っ before a voiceless
+ *                                counter. ろく before さ is the one refusal.
+ *   3, 4, 何, 千 end in ん      → they make a は-row counter change, though
+ *                                WHICH way is per counter: ふん→ぷん hardens,
+ *                                ひゃく→びゃく voices.
+ *
+ * 〜つ IS DELIBERATELY NOT ON THIS SHEET, though chapter 15 teaches it. The
+ * sheet's subject is what happens when a number meets a counter; the native
+ * series never meets one, because ひとつ IS both. Putting it here would need a
+ * fourth value of `first` meaning "the question does not arise", and would make
+ * the page's one idea answer a case it was not about.
  *
  * A SEPARATE AXIS, OFTEN CONFUSED WITH IT: which *number word* is used. よ/よん,
  * しち/なな, く/きゅう is a choice of vocabulary, not a sound change — よじ is not
@@ -196,6 +216,26 @@ window.COUNTERS = {
         { n: 10, r: "じゅっぷん",   ro: "juppun",  t: "gp", alt: "じっぷん" },
       ],
       nan: "なんぷん", nanRo: "nanpun", nanT: "p",
+    },
+    {
+      id: "nin",
+      jp: "〜にん", kanji: "〜人", en: "people",
+      lesson: 15, path: "lessons/0015-numbers-and-counting.html",
+      first: "voiced", base: "にん",
+      note: "**Nothing can happen to a nasal** — に has nothing to voice and nothing to harden, so eight of its ten cells are the plain number word joined on. What it has instead is the old series showing through at the bottom: 1 and 2 are ひとり and ふたり, native words with a counter り that survives nowhere else, and 4 and 7 keep the old readings よ and しち. From 3 upward it is にん and nothing else.",
+      rows: [
+        { n: 1,  r: "ひとり",       ro: "hitori",    t: "n" },
+        { n: 2,  r: "ふたり",       ro: "futari",    t: "n" },
+        { n: 3,  r: "さんにん",     ro: "sannin",    t: "" },
+        { n: 4,  r: "よにん",       ro: "yonin",     t: "x" },
+        { n: 5,  r: "ごにん",       ro: "gonin",     t: "" },
+        { n: 6,  r: "ろくにん",     ro: "rokunin",   t: "" },
+        { n: 7,  r: "しちにん",     ro: "shichinin", t: "x", alt: "ななにん" },
+        { n: 8,  r: "はちにん",     ro: "hachinin",  t: "" },
+        { n: 9,  r: "きゅうにん",   ro: "kyūnin",    t: "", alt: "くにん" },
+        { n: 10, r: "じゅうにん",   ro: "jūnin",     t: "" },
+      ],
+      nan: "なんにん", nanRo: "nannin", nanT: "",
     },
   ],
 };

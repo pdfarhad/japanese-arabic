@@ -32,6 +32,7 @@
  */
 
 import { speak, available } from './speech.js';
+import { richEl } from './rich-note.js';
 import { wordsLanguage, onWordsLanguage } from './lang-switch.js';
 
 /* Each direction carries its own accessors and the language of each side, so
@@ -235,7 +236,7 @@ export function mountVocabDrill(root) {
 
     const cat = cats.find(c => c.id === entry.c);
     if (cat) reveal.appendChild(el('p', 'vd-reveal-cat', `Group: ${cat.en}`));
-    if (entry.n) reveal.appendChild(el('p', 'kana-mnemonic', entry.n));
+    if (entry.n) reveal.appendChild(richEl('p', 'kana-mnemonic', entry.n));
 
     reveal.classList.add('shown');
   }

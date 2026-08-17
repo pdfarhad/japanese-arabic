@@ -19,6 +19,7 @@
  */
 
 import { available } from './speech.js';
+import { richEl } from './rich-note.js';
 import { wordsLanguage, onWordsLanguage } from './lang-switch.js';
 
 const el = (tag, cls, text) => {
@@ -76,7 +77,7 @@ export function wordCard(w, lang) {
     second,
     el('span', 'vw-translit', also.tl),
   );
-  if (w.n) card.appendChild(el('p', 'vw-note', w.n));
+  if (w.n) card.appendChild(richEl('p', 'vw-note', w.n));
   return card;
 }
 

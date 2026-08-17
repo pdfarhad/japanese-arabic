@@ -41,6 +41,7 @@
  */
 
 import { speak, available } from './speech.js';
+import { richEl } from './rich-note.js';
 import {
   SESSION_MAX, buildPool, buildSession, troubleDeck,
   loadStats, recordAnswer, resetStats, cardKey,
@@ -291,7 +292,7 @@ export function mountFlashcards(root) {
     if (entry.catLabel) where.append(el('span', 'fc-back-cat', `· ${entry.catLabel}`));
     back.appendChild(where);
 
-    if (entry.n) back.appendChild(el('p', 'kana-mnemonic', entry.n));
+    if (entry.n) back.appendChild(richEl('p', 'kana-mnemonic', entry.n));
 
     const stat = stats[cardKey(entry)];
     if (stat && (stat.w || stat.r)) {

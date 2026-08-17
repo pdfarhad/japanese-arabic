@@ -1,0 +1,273 @@
+/* numbers.css — the two-series table and the number reader (lesson 15).
+ *
+ * Loaded after jp-ar.css by the pages that mount `number-say.js`. Light-only,
+ * like the rest of the course; the palette comes from style.css and theme.css
+ * through variables, so nothing here is a literal colour that the fuji theme
+ * would then have to fight — see `theme.css`'s footnote about the eight
+ * hardcoded colours that had to move.
+ *
+ * ---- Japanese is set larger than the Latin ----
+ *
+ * Farhad's rule of 2026-08-13, asked of the reading chapter first: at least 3px
+ * bigger than the body text beside it. `reading.css` and `flashcards.css` carry
+ * the same two rules with the same numbers, and a page built after the rule
+ * should be born following it rather than wait for the pass over the older
+ * lessons. Wrapped in `@media screen` for the reason theme.css is: a printed
+ * sheet is a different medium and its measure is already fixed.
+ */
+
+@media screen {
+  .jp { font-size: 1.2em; }
+  .kicker .jp { font-size: 1.3em; }
+}
+
+/* ------------------------------------------------ the two series, side by side */
+
+/* A table rather than a grid of cards, unlike kosoado-grid.js: this really is
+   two columns of one thing indexed by a number, the rows are short, and the
+   whole argument is read ACROSS a row — ichi against hitotsu. Two columns fit a
+   phone; seven did not, which is why that component is not a table and this
+   one is. */
+.ns-table { font-size: .95em; }
+.ns-table th, .ns-table td { padding: 8px 10px; vertical-align: top; }
+
+.ns-numhead, .ns-num {
+  width: 2.2rem;
+  font: 600 .95rem/1.4 var(--mono);
+  color: var(--faint);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.ns-head { min-width: 0; }
+.ns-head-jp {
+  display: block;
+  font-family: var(--jp);
+  font-size: 1.12rem;
+  color: var(--jp-ink);
+}
+.ns-head-ro { display: block; font: 500 11px/1.6 var(--mono); color: var(--faint); }
+.ns-head-en { display: block; font-size: .8rem; color: var(--muted); font-style: italic; }
+
+.ns-cell { min-width: 0; }
+
+/* The whole cell is the button, exactly as counter-grid.js does it and for the
+   same reason: this page is about how the numbers SOUND, and a silent table
+   would teach the one thing the subject is not about. */
+.ns-say {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: none;
+  padding: 2px 0;
+  margin: 0;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+.ns-say:hover .ns-r { color: var(--accent-ink); }
+.ns-say:active { transform: scale(.97); }
+.ns-say.no-voice { cursor: default; }
+.ns-say.speaking .ns-r { color: var(--accent); }
+
+.ns-k {
+  font-family: var(--jp);
+  font-size: 1.35rem;
+  color: var(--ink);
+  margin-right: .45rem;
+}
+.ns-r {
+  font-family: var(--jp);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--jp-ink);
+}
+.ns-ro { display: block; font-size: .78em; }
+
+.ns-alt { display: block; margin-top: 5px; font-size: .82rem; color: var(--muted); }
+.ns-say-alt { display: inline; width: auto; }
+.ns-alt-jp { font-family: var(--jp); font-size: 1.2em; color: var(--jp-ink); }
+.ns-alt-ro { font-size: .95em; }
+
+.ns-note {
+  display: block;
+  margin-top: 6px;
+  font-size: .8rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.ns-cell.is-empty { color: var(--faint); }
+.ns-dash { font-size: 1.35rem; }
+.ns-empty-note { display: block; font-size: .78rem; font-style: italic; }
+
+/* ---------------------------------------------- the last-mora zone strip (§4) */
+
+/* `.zone-w` in jp-ar.css is in the Japanese face, because lesson 12's zones held
+   Japanese words. Lesson 12's figure labels its territories in the caption;
+   this one has to state a RULE inside each box, in English, so it needs a third
+   line style. Using `.zone-w` for it set an English sentence in the Japanese
+   stack — visibly a different family from the rest of the page. */
+.zone-rule {
+  display: block;
+  margin: 9px 0 7px;
+  font: 600 .88rem/1.45 var(--serif);
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------- the reader */
+
+.nr-mounted {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  padding: var(--s-3);
+  margin: var(--s-4) 0 var(--s-5);
+}
+
+.nr-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+}
+.nr-form > * { min-width: 0; }
+
+.nr-label { font: 500 11px/1.6 var(--mono); color: var(--faint); }
+
+.nr-input {
+  flex: 1 1 8rem;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  padding: 8px 11px;
+  font: 600 1.15rem/1.3 var(--mono);
+}
+.nr-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.nr-dice {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  padding: 8px 13px;
+  font: 500 .88rem/1.3 var(--serif);
+  cursor: pointer;
+}
+.nr-dice:hover { border-color: var(--accent); color: var(--accent-ink); }
+.nr-dice-face { font-size: 1.05rem; }
+
+.nr-out:empty { display: none; }
+.nr-line + .nr-line { margin-top: var(--s-3); }
+.nr-line { margin-top: var(--s-3); }
+
+.nr-cap { margin: 0 0 2px; font: 500 11px/1.6 var(--mono); color: var(--faint); }
+
+.nr-digits {
+  margin: 0;
+  font: 600 clamp(1.1rem, 4.6vw, 1.5rem)/1.3 var(--mono);
+  color: var(--muted);
+  overflow-wrap: break-word;
+}
+
+/* The blocks are the lesson: the same digits cut every four instead of every
+   three. Wrapping is allowed — nine digits plus units do not fit 390px on one
+   line — but a block itself never breaks, because a block split down the middle
+   says the opposite of what the figure argues. */
+.nr-blocks {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .35rem .5rem;
+}
+.nr-block {
+  white-space: nowrap;
+  font: 600 clamp(1.1rem, 4.6vw, 1.5rem)/1.3 var(--mono);
+  color: var(--ink);
+}
+.nr-bu {
+  font-family: var(--jp);
+  font-size: 1.05em;
+  color: var(--accent);
+  margin-left: .1rem;
+}
+.nr-plus { color: var(--faint); font: 600 1rem/1 var(--mono); }
+
+.nr-answer { border-top: 1px solid var(--border); padding-top: var(--s-3); }
+
+.nr-kanji {
+  margin: 0 0 4px;
+  font-family: var(--jp);
+  font-size: 1.25rem;
+  color: var(--muted);
+  overflow-wrap: break-word;
+}
+
+.nr-say {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+/* Sized and lifted rather than left on the baseline: at .85rem against a
+   1.9rem kana it sat low and read as a smudge in a screenshot. */
+.nr-say::before {
+  content: "🔊";
+  font-size: 1.05rem;
+  margin-right: .45rem;
+  vertical-align: .15em;
+}
+.nr-say:hover .nr-kana { color: var(--accent-ink); }
+.nr-say.no-voice { cursor: default; }
+.nr-say.speaking .nr-kana { color: var(--accent); }
+
+.nr-kana {
+  font-family: var(--jp);
+  font-size: clamp(1.35rem, 5.6vw, 1.9rem);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--jp-ink);
+  overflow-wrap: anywhere;
+}
+
+.nr-ro { display: block; margin-top: 4px; font-size: .85em; }
+
+.nr-ask {
+  margin-top: var(--s-3);
+  border-top: 1px solid var(--border);
+  padding-top: var(--s-3);
+}
+.nr-ask-say { margin: 0 0 var(--s-2); color: var(--muted); font-style: italic; }
+.nr-reveal {
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--accent-ink);
+  padding: 8px 15px;
+  font: 500 .9rem/1.3 var(--serif);
+  cursor: pointer;
+}
+.nr-reveal:hover { background: var(--blue-bg); }
+
+.nr-bad { margin: var(--s-3) 0 0; color: var(--wrong-ink); font-size: .9rem; }
+.nr-hint { margin: var(--s-3) 0 0; font-size: .82rem; color: var(--muted); }
+
+/* Print: the reader is an input box and cannot be used on paper, so it collapses
+   to nothing rather than printing an empty card. The series table prints. */
+@media print {
+  .nr-mounted { display: none; }
+}

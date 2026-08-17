@@ -1,10 +1,10 @@
-/* counter-cards-data.js — the 31 counter readings that are NOT regular, as cards.
+/* counter-cards-data.js — the 35 counter readings that are NOT regular, as cards.
  *
  * `window.VOCABC`, in the same shape as every `vocab*-data.js` set, so the
  * practice deck reads it through `flashcard-sets.js` with no special case.
  *
- * WHY ONLY 31 OF THE 70. `reference/counters.html` lists every reading from 1 to
- * 10 for seven counters. Thirty-nine of those are the number word joined to the
+ * WHY ONLY 35 OF THE 80. `reference/counters.html` lists every reading from 1 to
+ * 10 for eight counters. Forty-five of those are the number word joined to the
  * counter and nothing else — にさい, ろくじ, ごえん — and drilling them teaches
  * nothing a learner does not already have. **The exceptions are the whole
  * problem**, so the deck gets exactly the exceptions: every cell the sheet flags
@@ -21,13 +21,15 @@
  * `check_one_day.py` establishes the pattern, and a builder would put the
  * glosses somewhere anyway.
  *
- * THIRTEEN OF THE 31 ARE ALREADY CARDS IN VOCAB10 — the three irregular months
- * and all ten native day-readings. They are kept here so the set's premise
- * ("every reading that changes") stays true, and their **English and Arabic are
- * copied verbatim from `vocab10-data.js`** so a learner meeting ついたち in two
- * places never meets two glosses for it. The deck's dedupe drops them and deals
- * chapter 10's copies, which is exactly what dedupe is for: **this set adds 18
- * cards to the deck, not 31.**
+ * FIFTEEN OF THE 35 ARE ALREADY CARDS ELSEWHERE — thirteen in VOCAB10 (the
+ * three irregular months and all ten native day-readings) and, from 2026-08-17,
+ * ひとり and ふたり in VOCAB15. They are kept here so the set's premise ("every
+ * reading that changes") stays true, and their **English and Arabic are copied
+ * verbatim from the chapter that owns them** so a learner meeting ついたち in two
+ * places never meets two glosses for it. `check_counters.py` asserts the copies
+ * against both sets. The deck's dedupe drops them and deals the chapter's
+ * copies, which is exactly what dedupe is for: **this set adds 20 cards to the
+ * deck, not 35.**
  *
  * THE ARABIC IS A SECOND EXERCISE HERE, not a gloss. Japanese counters and
  * Arabic number agreement are the same kind of difficulty in different clothes —
@@ -52,6 +54,7 @@ window.VOCABC = {
     { id: "en",    jp: "〜えん", r: "~en",    en: "Yen — the only irregular cell it has" },
     { id: "ji",    jp: "〜じ",   r: "~ji",    en: "Hours — three different number words" },
     { id: "fun",   jp: "〜ふん", r: "~fun",   en: "Minutes — the busiest counter in the course" },
+    { id: "nin",   jp: "〜にん", r: "~nin",   en: "People — where the old series still shows" },
   ],
 
   words: [
@@ -130,5 +133,21 @@ window.VOCABC = {
       n: "Both changes again. はちふん is also heard and is not wrong, which makes this the loosest cell on the sheet." },
     { c: "fun", k: "じゅっぷん", r: "juppun", e: "ten minutes", a: "عَشْرُ دَقَائِقَ", at: "ʿashr daqāʾiq",
       n: "Both changes, and the alternative じっぷん. Ten minutes is the unit Japanese timetables actually think in — じゅっぷんごとに, every ten minutes." },
+
+    /* ---------- 〜にん · no sound change at all, and four old words ---------- */
+    /* The only group here whose irregulars are ALL of the `n`/`x` kind. That is
+       the sheet's own thesis holding: に is a nasal, so nothing can geminate or
+       harden against it, and everything odd about this counter is vocabulary
+       left over from the older series rather than phonetics. ひとり and ふたり
+       repeat VOCAB15's cards and their glosses are copied from it verbatim,
+       exactly as the thirteen VOCAB10 readings above are. */
+    { c: "nin", k: "ひとり", r: "hitori", e: "one person", a: "شَخْصٌ وَاحِدٌ", at: "shakhṣun wāḥid",
+      n: "一人 — native ひと with an old counter り, not 〜にん. It also means *alone*: ひとりで, by oneself." },
+    { c: "nin", k: "ふたり", r: "futari", e: "two people", a: "شَخْصَانِ", at: "shakhṣāni",
+      n: "二人, the same り. These two are the last survivors of the native series inside a counter — from three onward it is にん and nothing else." },
+    { c: "nin", k: "よにん", r: "yonin", e: "four people", a: "أَرْبَعَةُ أَشْخَاصٍ", at: "arbaʿatu ashkhāṣ",
+      n: "よ, not よん — the same short reading 〜じ takes at four o'clock, and the opposite of what 〜ふん and 〜かい do. Four is the number this course has now seen said three different ways." },
+    { c: "nin", k: "しちにん", r: "shichinin", e: "seven people", a: "سَبْعَةُ أَشْخَاصٍ", at: "sabʿatu ashkhāṣ",
+      n: "しち, not なな — the reading that survives in 七月 and 七時. ななにん is heard and understood; 黒澤's 七人の侍 is しちにん." },
   ],
 };

@@ -61,6 +61,12 @@ window.FLASHCARD_SETS = [
     label: "The working day",
     lesson: "lessons/0014-the-working-day.html",
   },
+  {
+    global: "VOCAB15",
+    n: 15,
+    label: "Numbers and counting",
+    lesson: "lessons/0015-numbers-and-counting.html",
+  },
   /* NOT A CHAPTER, and the first entry that is not. `short` is what the checkbox
      badge shows in place of a chapter number and `chip` is what a card's back
      calls its source — both exist so this set did not have to be given a fake
@@ -68,7 +74,11 @@ window.FLASHCARD_SETS = [
      `files` names its data because the file is not `vocab15-data.js`. */
   {
     global: "VOCABC",
-    n: 15,
+    /* `n` is display order and nothing else — `short` is what the badge shows.
+       Bumped 15 → 16 on 2026-08-17 when a real chapter 15 arrived, which is the
+       hazard this entry's own comment predicted: two sets claiming the same
+       number is the "fake chapter" it was written to avoid. */
+    n: 16,
     short: "±",
     chip: "Counters",
     label: "Counters that change",

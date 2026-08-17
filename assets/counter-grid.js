@@ -23,6 +23,7 @@
  */
 
 import { speak, available } from './speech.js';
+import { richEl } from './rich-note.js';
 
 const el = (tag, cls, text) => {
   const n = document.createElement(tag);
@@ -205,14 +206,10 @@ export function mountCounterNotes(root) {
       el('span', 'cn-count', `${changed} of 10 readings irregular`));
     item.appendChild(meta);
 
-    /* The notes carry **bold** and nothing else, so they are split rather than
-       inserted as HTML — a data file must not be able to write markup. */
-    const note = el('p', 'cn-note');
-    c.note.split(/\*\*/).forEach((part, i) => {
-      note.appendChild(i % 2 ? el('strong', null, part)
-                             : document.createTextNode(part));
-    });
-    item.appendChild(note);
+    /* `rich-note.js` — extracted from this very block on 2026-08-17, once it
+       turned out that the word-card renderers had never had it and were showing
+       the asterisks to the reader. A data file still cannot write markup. */
+    item.appendChild(richEl('p', 'cn-note', c.note));
 
     list.appendChild(item);
   });

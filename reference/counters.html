@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Reference · Counters and their sound changes</title>
-<meta name="description" content="The seven counters this course has taught — months, days, age, floors, yen, hours and minutes — from 1 to 10 with every euphonic change marked, and the one rule that predicts which counters change at all.">
+<meta name="description" content="The eight counters this course has taught — months, days, age, floors, yen, hours, minutes and people — from 1 to 10 with every euphonic change marked, and the one rule that predicts which counters change at all.">
 <link rel="stylesheet" href="../assets/style.css">
 <link rel="stylesheet" href="../assets/jp-ar.css">
 <link rel="stylesheet" href="../assets/theme.css">
@@ -15,7 +15,7 @@
 
 <p class="kicker">Reference · <span class="jp">じょすうし</span> — counters</p>
 <h1>Counters, and which ones change</h1>
-<p class="lede">Seven counters, four chapters, seventy readings. Tap any of them
+<p class="lede">Eight counters, five chapters, eighty readings. Tap any of them
 to hear it. The thing worth carrying away is not the table — it is the one
 question you can ask <em>before</em> the table.</p>
 <p class="meta">Readings checked against
@@ -44,7 +44,7 @@ at all</strong> — before you know which number you are attaching.</p>
       <td><strong>voiced</strong> — <span class="jp">が, じ, に</span></td>
       <td>Nothing happens either. It is already voiced; there is nothing left to
       do to it.</td>
-      <td class="chart-jp">〜がつ　〜じ　〜にち</td>
+      <td class="chart-jp">〜がつ　〜じ　〜にち　〜にん</td>
     </tr>
     <tr>
       <td><strong>voiceless</strong> — <span class="jp">か, さ, ふ</span></td>
@@ -65,6 +65,11 @@ at all</strong> — before you know which number you are attaching.</p>
   to behave.</p>
   <p>You will still have to learn <em>which</em> numbers do it. But you will
   never be surprised by <em>whether</em>.</p>
+  <p><strong>It has now been tested once.</strong> This sheet predicted
+  <span class="jp">〜にん</span> would behave before the readings were written
+  down, and when chapter 15 wrote them down it did: eight of its ten cells are
+  the plain number joined on, and the two odd ones are old words rather than
+  sounds.</p>
 </div>
 
 <h2 id="changes"><span class="no">2.</span>The two changes, and the numbers that cause them</h2>
@@ -117,6 +122,29 @@ at all</strong> — before you know which number you are attaching.</p>
   declines to geminate, so it is the one cell worth memorising on its own.</p>
 </div>
 
+<div class="callout win">
+  <p class="title">Trick 2 · The same rule read from the number's side</p>
+  <p>Section 1 asks what the <em>counter</em> starts with. Ask instead what the
+  <em>number</em> ends with, and the whole table above collapses into three
+  groups:</p>
+  <ul>
+    <li><strong><span class="jp">に ご なな きゅう</span> end in a vowel</strong>
+    — and never change anything, in any column of this sheet. That is four
+    tenths of every counter table, gone.</li>
+    <li><strong><span class="jp">いち ろく はち じゅう</span> end in
+    <span class="jp">ち・く・う</span></strong> — they collapse to
+    <span class="jp">っ</span>.</li>
+    <li><strong><span class="jp">さん よん なん せん</span> end in
+    <span class="jp">ん</span></strong> — they reach forward and change a
+    <span class="jp">は</span>-row counter.</li>
+  </ul>
+  <p>The first line is the useful one, and it is exceptionless across all eight
+  counters here — <code>check_counters.py</code> asserts it, so a ninth counter
+  that broke it could not be added quietly.
+  <a href="../lessons/0015-numbers-and-counting.html">Chapter 15</a> builds the
+  numbers this way round.</p>
+</div>
+
 <div class="callout">
   <p class="title">A different thing entirely: <span class="jp">よ・し</span>,
   <span class="jp">しち・なな</span>, <span class="jp">く・きゅう</span></p>
@@ -134,7 +162,7 @@ at all</strong> — before you know which number you are attaching.</p>
   <span class="jp">きゅう</span>.</p>
 </div>
 
-<h2 id="table"><span class="no">3.</span>All seven, 1 to 10</h2>
+<h2 id="table"><span class="no">3.</span>All eight, 1 to 10</h2>
 
 <p><strong>The two tables are the two groups from section 1</strong>, and the
 shading tells you the split was worth making: the first table has none and the
@@ -144,7 +172,7 @@ second is covered in it.</p>
 <span class="jp">っ</span> gemination, <span class="jp">ぷ</span> hardening,
 <span class="jp">が</span> voicing, <strong>✱</strong> a different number word
 or a native numeral. <strong>Tap any reading to hear it</strong> — this whole
-sheet is about sound, and the page can say all seventy.</p>
+sheet is about sound, and the page can say all eighty.</p>
 
 <div id="counter-table">
   <p><em>The table needs JavaScript. Every reading in it is also in the lesson
@@ -187,7 +215,6 @@ have not:</p>
   <thead><tr><th>Question</th><th>Asks for</th><th>Counter not yet taught</th></tr></thead>
   <tbody>
     <tr><td class="chart-jp">なんねん</td><td>which year</td><td class="chart-jp">〜ねん</td></tr>
-    <tr><td class="chart-jp">なんにん</td><td>how many people</td><td class="chart-jp">〜にん</td></tr>
     <tr><td class="chart-jp">なんじかん</td><td>how many hours</td><td class="chart-jp">〜じかん</td></tr>
     <tr><td class="chart-jp">なんしゅうかん</td><td>how many weeks</td><td class="chart-jp">〜しゅうかん</td></tr>
     <tr><td class="chart-jp">なんかげつ</td><td>how many months</td><td class="chart-jp">〜かげつ</td></tr>
@@ -196,9 +223,9 @@ have not:</p>
 
 <p class="meta">Two of those start voiceless — <span class="jp">〜かげつ</span>
 and <span class="jp">〜しゅうかん</span> — so section 1 predicts they will change
-when they arrive. <span class="jp">〜にん</span> starts voiced and mostly will
-not, though it hides two irregulars at 1 and 2 that are words rather than
-readings.</p>
+when they arrive. <span class="jp">〜にん</span> used to be on this list with the
+prediction that it would not; <a href="../lessons/0015-numbers-and-counting.html">chapter
+15</a> taught it and the prediction held, so it has moved up into the table.</p>
 
 <div class="sources">
   <h2><span class="no">7.</span>Sources</h2>
