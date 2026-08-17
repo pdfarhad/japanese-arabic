@@ -1,0 +1,20 @@
+/* jp-size.css — Japanese is set larger than the Latin around it.
+ *
+ * Farhad's rule of 2026-08-13, asked of the reading chapter first: every
+ * Japanese run at least 3px bigger than the body text beside it. reading.css,
+ * flashcards.css and numbers.css carry these same two rules inline because
+ * those pages have stylesheets of their own; a lesson that has none links THIS
+ * file after jp-ar.css instead of growing a fourth copy. Lesson 16 is the
+ * first such page.
+ *
+ * When the sweep over lessons 1–14 happens (see NOTES.md), these rules move
+ * into jp-ar.css, the three inline copies come out, and this file goes away.
+ *
+ * Wrapped in @media screen for the reason theme.css is: print's measure is
+ * already fixed, and the reference sheets exist to be printed.
+ */
+
+@media screen {
+  .jp { font-size: 1.2em; }
+  .kicker .jp { font-size: 1.3em; }
+}

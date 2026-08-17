@@ -116,6 +116,13 @@ window.COURSE_MAP = {
       path: "lessons/0015-numbers-and-counting.html",
       min: 24,
     },
+    {
+      n: 16,
+      id: "0016-going-and-coming",
+      title: "Three verbs, and every way to go",
+      path: "lessons/0016-going-and-coming.html",
+      min: 20,
+    },
   ],
 
   /* Reading chapters are a separate category on purpose — they are the
@@ -146,7 +153,7 @@ window.COURSE_MAP = {
         {
           n: 1,
           id: "flash-cards",
-          title: "Flash Cards — chapters 10–14 and the counters",
+          title: "Flash Cards — chapters 10–16 and the counters",
           path: "practice/flash-cards.html",
           min: 15,
         },

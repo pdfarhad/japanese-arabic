@@ -67,6 +67,12 @@ window.FLASHCARD_SETS = [
     label: "Numbers and counting",
     lesson: "lessons/0015-numbers-and-counting.html",
   },
+  {
+    global: "VOCAB16",
+    n: 16,
+    label: "Going and coming",
+    lesson: "lessons/0016-going-and-coming.html",
+  },
   /* NOT A CHAPTER, and the first entry that is not. `short` is what the checkbox
      badge shows in place of a chapter number and `chip` is what a card's back
      calls its source — both exist so this set did not have to be given a fake
@@ -75,10 +81,10 @@ window.FLASHCARD_SETS = [
   {
     global: "VOCABC",
     /* `n` is display order and nothing else — `short` is what the badge shows.
-       Bumped 15 → 16 on 2026-08-17 when a real chapter 15 arrived, which is the
-       hazard this entry's own comment predicted: two sets claiming the same
-       number is the "fake chapter" it was written to avoid. */
-    n: 16,
+       Bumped 15 → 16 on 2026-08-17 when a real chapter 15 arrived, then 16 → 17
+       the same day when chapter 16 did — the hazard this entry's own comment
+       predicted, twice. The counter set sorts last, after every real chapter. */
+    n: 17,
     short: "±",
     chip: "Counters",
     label: "Counters that change",

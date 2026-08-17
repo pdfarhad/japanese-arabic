@@ -1,4 +1,4 @@
-/* counter-data.js — the eight counters the course has taught, 1 to 10 plus 何.
+/* counter-data.js — the nine counters the course has taught, 1 to 10 plus 何.
  *
  * `counter-grid.js` renders it into `reference/counters.html`. Edit here, nowhere
  * else. `scripts/check_counters.py` verifies every cell against the rule its own
@@ -236,6 +236,26 @@ window.COUNTERS = {
         { n: 10, r: "じゅうにん",   ro: "jūnin",     t: "" },
       ],
       nan: "なんにん", nanRo: "nannin", nanT: "",
+    },
+    {
+      id: "bansen",
+      jp: "〜ばんせん", kanji: "〜番線", en: "platform number",
+      lesson: 16, path: "lessons/0016-going-and-coming.html",
+      first: "voiced", base: "ばんせん",
+      note: "The cheapest column on the sheet, and the point of it is the price. ば is voiced, so the first-sound rule promises nothing will ever happen — and nothing does: **ten cells, zero tags**, the first counter here with not even a different number word. This is the rule working forward, as §6 said it would: the column was predictable before chapter 16 taught the word.",
+      rows: [
+        { n: 1,  r: "いちばんせん",   ro: "ichibansen",  t: "" },
+        { n: 2,  r: "にばんせん",     ro: "nibansen",    t: "" },
+        { n: 3,  r: "さんばんせん",   ro: "sanbansen",   t: "" },
+        { n: 4,  r: "よんばんせん",   ro: "yonbansen",   t: "" },
+        { n: 5,  r: "ごばんせん",     ro: "gobansen",    t: "" },
+        { n: 6,  r: "ろくばんせん",   ro: "rokubansen",  t: "" },
+        { n: 7,  r: "ななばんせん",   ro: "nanabansen",  t: "" },
+        { n: 8,  r: "はちばんせん",   ro: "hachibansen", t: "" },
+        { n: 9,  r: "きゅうばんせん", ro: "kyūbansen",   t: "" },
+        { n: 10, r: "じゅうばんせん", ro: "jūbansen",    t: "" },
+      ],
+      nan: "なんばんせん", nanRo: "nanbansen", nanT: "",
     },
   ],
 };
