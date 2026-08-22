@@ -123,6 +123,13 @@ window.COURSE_MAP = {
       path: "lessons/0016-going-and-coming.html",
       min: 20,
     },
+    {
+      n: 17,
+      id: "0017-verbs-and-their-objects",
+      title: "Eleven verbs, and a day to spend them on",
+      path: "lessons/0017-verbs-and-their-objects.html",
+      min: 22,
+    },
   ],
 
   /* Reading chapters are a separate category on purpose — they are the
@@ -153,7 +160,7 @@ window.COURSE_MAP = {
         {
           n: 1,
           id: "flash-cards",
-          title: "Flash Cards — chapters 10–16 and the counters",
+          title: "Flash Cards — chapters 10–17 and the counters",
           path: "practice/flash-cards.html",
           min: 15,
         },
