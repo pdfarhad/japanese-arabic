@@ -182,6 +182,13 @@ window.COURSE_MAP = {
           path: "practice/flash-cards.html",
           min: 15,
         },
+        {
+          n: 2,
+          id: "reading-plan",
+          title: "The Reading Plan — Reading 1, then Tadoku's free books",
+          path: "practice/reading-plan.html",
+          min: 10,
+        },
       ],
     },
   ],
