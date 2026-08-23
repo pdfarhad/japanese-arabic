@@ -130,7 +130,7 @@ window.READING1 = {
               en: "Mr Santos is a company employee too.",
               ar: "سَانْتُوس أَيْضًا مُوَظَّفُ شَرِكَةٍ.",
               at: "Santōs ayḍan muwaẓẓafu sharika",
-              n: "も replaces は — it never sits beside it. It is the one particle on this page the course has not taught yet.",
+              n: "も replaces は — it never sits beside it. Taught as Rule 4 of Grammar 1.",
             },
           ],
         },

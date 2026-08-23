@@ -138,6 +138,24 @@ window.COURSE_MAP = {
      reached a chapter it has not. nav.js renders each group under its own
      heading and gives it its own prev/next chain. */
   groups: [
+    /* Grammar lessons are the fourth category, decided by Farhad 2026-08-23:
+       "ingest grammer lessons as separate section." They follow the teacher's
+       own "Grammar Lesson N" numbering, not the day lessons' — a day lesson
+       brings new words, a grammar lesson formalizes what the words have been
+       doing, so numbering one among the lessons would claim a chapter of new
+       material that is not there. */
+    {
+      label: "Grammar Lessons",
+      items: [
+        {
+          n: 1,
+          id: "0001-six-rules-one-sentence",
+          title: "Six rules, one sentence",
+          path: "grammar/0001-six-rules-one-sentence.html",
+          min: 16,
+        },
+      ],
+    },
     {
       label: "Reading Chapters",
       items: [
