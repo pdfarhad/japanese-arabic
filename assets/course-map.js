@@ -130,6 +130,13 @@ window.COURSE_MAP = {
       path: "lessons/0017-verbs-and-their-objects.html",
       min: 22,
     },
+    {
+      n: 18,
+      id: "0018-giving-and-receiving",
+      title: "Give and take, and both halves of the door",
+      path: "lessons/0018-giving-and-receiving.html",
+      min: 23,
+    },
   ],
 
   /* Reading chapters are a separate category on purpose — they are the

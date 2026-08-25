@@ -17,4 +17,11 @@
 @media screen {
   .jp { font-size: 1.2em; }
   .kicker .jp { font-size: 1.3em; }
+  /* The walk's in-prose kana. jp-ar.css sets .od-wk to 1.16em, which against
+     an 18px carrier paragraph is +2.88px — a hair under the rule. Found by
+     measurement while building lesson 18 (the chapter-17 pass measured prose,
+     kicker, callout, charts and phrases, and never probed the walk). Scoped
+     here so only the born-following pages (16–18) grow; lessons 11–14's walks
+     keep the old size until the sweep. */
+  .od-w .od-wk { font-size: 1.2em; }
 }
