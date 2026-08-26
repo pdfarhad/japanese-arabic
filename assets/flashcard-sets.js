@@ -85,6 +85,12 @@ window.FLASHCARD_SETS = [
     label: "Giving and receiving",
     lesson: "lessons/0018-giving-and-receiving.html",
   },
+  {
+    global: "VOCAB19",
+    n: 19,
+    label: "Describing things",
+    lesson: "lessons/0019-describing-things.html",
+  },
   /* NOT A CHAPTER, and the first entry that is not. `short` is what the checkbox
      badge shows in place of a chapter number and `chip` is what a card's back
      calls its source — both exist so this set did not have to be given a fake
@@ -94,11 +100,11 @@ window.FLASHCARD_SETS = [
     global: "VOCABC",
     /* `n` is display order and nothing else — `short` is what the badge shows.
        Bumped 15 → 16 on 2026-08-17 when a real chapter 15 arrived, 16 → 17 the
-       same day when chapter 16 did, 17 → 18 on 2026-08-22 for chapter 17, and
-       18 → 19 on 2026-08-25 for chapter 18 — the hazard this entry's own
-       comment predicted, four times now. The counter set sorts last, after
-       every real chapter. */
-    n: 19,
+       same day when chapter 16 did, 17 → 18 on 2026-08-22 for chapter 17,
+       18 → 19 on 2026-08-25 for chapter 18, and 19 → 20 on 2026-08-26 for
+       chapter 19 — the hazard this entry's own comment predicted, five times
+       now. The counter set sorts last, after every real chapter. */
+    n: 20,
     short: "±",
     chip: "Counters",
     label: "Counters that change",

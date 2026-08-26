@@ -137,6 +137,13 @@ window.COURSE_MAP = {
       path: "lessons/0018-giving-and-receiving.html",
       min: 23,
     },
+    {
+      n: 19,
+      id: "0019-describing-things",
+      title: "Two families of describing words",
+      path: "lessons/0019-describing-things.html",
+      min: 24,
+    },
   ],
 
   /* Reading chapters are a separate category on purpose — they are the
