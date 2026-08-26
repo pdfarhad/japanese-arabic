@@ -168,6 +168,13 @@ window.COURSE_MAP = {
           path: "grammar/0001-six-rules-one-sentence.html",
           min: 16,
         },
+        {
+          n: 2,
+          id: "0002-pointing-and-answering",
+          title: "Pointing, and the shapes of an answer",
+          path: "grammar/0002-pointing-and-answering.html",
+          min: 15,
+        },
       ],
     },
     {
