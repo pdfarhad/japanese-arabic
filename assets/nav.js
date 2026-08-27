@@ -37,21 +37,34 @@
     ...(MAP.reference || []).map((r) => r.path),
     MAP.index || "index.html",
   ];
+  // Some static hosts serve x.html at the EXTENSIONLESS URL — Cloudflare
+  // Workers assets 307s /lessons/x.html to /lessons/x — so every pathname
+  // check must accept both forms. Missing this sent the fallback below to the
+  // page's own directory, and every drawer link doubled its first segment
+  // (/lessons/lessons/x.html). GitHub Pages and the local server still serve
+  // the .html form; both must keep matching.
+  const bare = (k) => (k.endsWith(".html") ? k.slice(0, -5) : k);
   const base = (() => {
     const p = location.pathname;
     for (const k of known) {
-      if (p.endsWith("/" + k)) return p.slice(0, p.length - k.length);
+      for (const form of k === bare(k) ? [k] : [k, bare(k)]) {
+        if (p.endsWith("/" + form)) return p.slice(0, p.length - form.length);
+      }
     }
     if (p.endsWith("/")) return p; // directory index, e.g. /repo/
     return p.slice(0, p.lastIndexOf("/") + 1); // unknown page: its own directory
   })();
   const rel = (p) => base + p;
 
+  const atPath = (k) =>
+    location.pathname.endsWith("/" + k) ||
+    location.pathname === "/" + k ||
+    (k !== bare(k) &&
+      (location.pathname.endsWith("/" + bare(k)) ||
+        location.pathname === "/" + bare(k)));
+
   const here = document.body.dataset.lesson || null;
-  const isCurrent = (item) =>
-    (here && item.id === here) ||
-    location.pathname.endsWith("/" + item.path) ||
-    location.pathname === "/" + item.path;
+  const isCurrent = (item) => (here && item.id === here) || atPath(item.path);
 
   const css = `
   .cnav-btn { position: fixed; top: 14px; right: 14px; z-index: 60;
@@ -114,7 +127,7 @@
     `<p class="cnav-label">${esc(g.label)}</p><ol>${itemLis(g.items)}</ol>`).join("");
 
   const refLis = (MAP.reference || []).map((r) =>
-    `<li${location.pathname.endsWith("/" + r.path) ? ' class="current"' : ""}>
+    `<li${atPath(r.path) ? ' class="current"' : ""}>
       <a href="${rel(r.path)}"><span class="cnav-n">§</span><span>${esc(r.title)}</span></a></li>`).join("");
 
   const extLis = (MAP.external || []).map((x) =>
